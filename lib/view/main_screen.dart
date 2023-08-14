@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_color.dart';
 import 'package:tech_blog/component/my_string.dart';
@@ -69,7 +70,9 @@ class MainScreen extends StatelessWidget {
                     MyStrings.tecIngithub,
                     style: textTheme.headlineMedium,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    myLaunchUrl(MyStrings.techBlogGithubUrl);
+                  },
                 ),
                 const Divider(color: SolidColors.dividerColor, thickness: 0.9),
               ],

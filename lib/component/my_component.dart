@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 import '../gen/assets.gen.dart';
@@ -66,4 +68,10 @@ class MainTags extends StatelessWidget {
           ),
         ));
   }
+}
+
+
+myLaunchUrl(String url)async{
+  var uri=Uri.parse(url);
+    await launchUrl(uri);
 }

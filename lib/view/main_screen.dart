@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_color.dart';
 import 'package:tech_blog/component/my_string.dart';
@@ -6,18 +7,14 @@ import 'package:tech_blog/view/home_screen.dart';
 import 'package:tech_blog/view/profile_screen.dart';
 import 'package:tech_blog/view/register_intro.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
 
-final GlobalKey<ScaffoldState> _key=GlobalKey();
+// ignore: must_be_immutable
+class MainScreen extends StatelessWidget {
+  RxInt selectedPageIndex = 0.obs;
 
-class _MainScreenState extends State<MainScreen> {
-
-  var selectedPageIndex=0;
+  MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,30 +29,46 @@ class _MainScreenState extends State<MainScreen> {
         drawer: Drawer(
           backgroundColor: SolidColors.scaffoldBg,
           child: Padding(
-            padding:  EdgeInsets.only(right: bodyMargin,left: bodyMargin),
+            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
             child: ListView(
               children: [
-                DrawerHeader(child: Image.asset(Assets.images.logo.path,scale: 3,)),
+                DrawerHeader(
+                    child: Image.asset(
+                  Assets.images.logo.path,
+                  scale: 3,
+                )),
                 ListTile(
-                  title: Text(MyStrings.userProfile,style: textTheme.headlineMedium,),
+                  title: Text(
+                    MyStrings.userProfile,
+                    style: textTheme.headlineMedium,
+                  ),
                   onTap: () {},
                 ),
-                const Divider(color: SolidColors.dividerColor,thickness: 0.9),
+                const Divider(color: SolidColors.dividerColor, thickness: 0.9),
                 ListTile(
-                  title: Text(MyStrings.aboutTec,style: textTheme.headlineMedium,),
+                  title: Text(
+                    MyStrings.aboutTec,
+                    style: textTheme.headlineMedium,
+                  ),
                   onTap: () {},
                 ),
-                const Divider(color: SolidColors.dividerColor,thickness: 0.9),
+                const Divider(color: SolidColors.dividerColor, thickness: 0.9),
                 ListTile(
-                  title: Text(MyStrings.shareTec,style: textTheme.headlineMedium,),
+                  title: Text(
+                    MyStrings.shareTec,
+                    style: textTheme.headlineMedium,
+                  ),
                   onTap: () {},
                 ),
-                const Divider(color: SolidColors.dividerColor,thickness: 0.9),
+                const Divider(color: SolidColors.dividerColor, thickness: 0.9),
                 ListTile(
-                  title: Text(MyStrings.tecIngithub,style: textTheme.headlineMedium,),
+                  title: Text(
+                    MyStrings.tecIngithub,
+                    style: textTheme.headlineMedium,
+                  ),
                   onTap: () {},
                 ),
-                const Divider(color: SolidColors.dividerColor,thickness: 0.9),
+                const Divider(color: SolidColors.dividerColor, thickness: 0.9),
               ],
             ),
           ),
@@ -84,15 +97,19 @@ class _MainScreenState extends State<MainScreen> {
         body: Stack(
           children: [
             Positioned.fill(
-              child: IndexedStack(
-                index: selectedPageIndex,
+                child: Obx(
+              () => IndexedStack(
+                index: selectedPageIndex.value,
                 children: [
-                  HomeScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-                  RegisterIntro(size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-                  ProfileScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  HomeScreen(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  RegisterIntro(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  ProfileScreen(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
                 ],
               ),
-            ),
+            )),
             Positioned(
               bottom: 0,
               right: 0,
@@ -110,13 +127,11 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                   BottomNavBar(
-                      bodyMarginNavBar: bodyMarginNavBar,
-                      size: size,
-                      changeScreen: (int value){
-                        setState(() {
-                          selectedPageIndex=value;
-                        });
-                      },
+                    bodyMarginNavBar: bodyMarginNavBar,
+                    size: size,
+                    changeScreen: (int value) {
+                      selectedPageIndex.value = value;
+                    },
                   ),
                 ],
               ),
@@ -161,17 +176,17 @@ class BottomNavBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   IconButton(
-                      onPressed: () =>changeScreen(0),
+                      onPressed: () => changeScreen(0),
                       icon: ImageIcon(
                         Assets.icons.home.provider(),
                         color: Colors.white,
                       )),
                   IconButton(
-                      onPressed: () =>changeScreen(1),
+                      onPressed: () => changeScreen(1),
                       icon: ImageIcon(Assets.icons.write.provider(),
                           color: Colors.white)),
                   IconButton(
-                      onPressed: () =>changeScreen(2),
+                      onPressed: () => changeScreen(2),
                       icon: ImageIcon(Assets.icons.user.provider(),
                           color: Colors.white)),
                 ],

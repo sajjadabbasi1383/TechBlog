@@ -172,7 +172,7 @@ class _MyCatsState extends State<MyCats> {
                         showAlertNameDialog(context);
                       } else {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const MainScreen()));
+                            builder: (context) => MainScreen()));
                       }
                     },
                     child: const Text("ثبت")),

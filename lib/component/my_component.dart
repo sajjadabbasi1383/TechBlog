@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'gen/assets.gen.dart';
-import 'models/fake_data.dart';
+
+import '../gen/assets.gen.dart';
+import '../models/fake_data.dart';
 import 'my_color.dart';
 
 class CustomDivider extends StatelessWidget {

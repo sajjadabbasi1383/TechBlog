@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_blog/models/fake_data.dart';
-import 'package:tech_blog/my_component.dart';
-import 'package:tech_blog/my_string.dart';
+import 'package:tech_blog/component/my_component.dart';
+import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/main_screen.dart';
 
 import '../gen/assets.gen.dart';
-import '../my_color.dart';
+import '../component/my_color.dart';
 
 class MyCats extends StatefulWidget {
   const MyCats({super.key});

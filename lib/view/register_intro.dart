@@ -5,6 +5,9 @@ import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/my_cats.dart';
 import 'package:validators/validators.dart';
 
+
+
+// ignore: must_be_immutable
 class RegisterIntro extends StatelessWidget {
    RegisterIntro({
     super.key,

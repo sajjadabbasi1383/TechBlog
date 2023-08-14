@@ -21,11 +21,8 @@ class MyStrings {
   """هنوز هیچ مقاله ای به جامعه گیک های فارسی 
 اضافه نکردی !!!""";
   static const String shareText = """
-
 من از تکبلاگ استفاده میکنم ، خیلی باحاله ، تو هم داشته باش\n
-
-www.sasansafari.com
-
+https://github.com/sajjadabbasi1383
 """;
   static const String podcastEmpty = """  
 

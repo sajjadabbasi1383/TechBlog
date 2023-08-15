@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tech_blog/component/api_component.dart';
+import 'package:tech_blog/services/dio_service.dart';
 import 'package:tech_blog/view/splash_screen.dart';
 
 import 'component/my_color.dart';
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    DioService().getMethod(ApiConstant.getHomeItem);
 
     return MaterialApp(
       localizationsDelegates: const [

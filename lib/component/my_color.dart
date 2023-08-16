@@ -21,6 +21,7 @@ class SolidColors {
   static const Color hintText = Color.fromARGB(255, 133, 133, 133);
   static const Color surface = Color.fromARGB(255, 242, 242, 242);
   static const Color greyColor = Color.fromARGB(255, 156, 156, 156);
+  static const Color greyColor2 = Color.fromARGB(90, 200, 200, 200);
   static const Color lightIcon = Color.fromARGB(255, 255, 255, 255);
   static const Color blackColor = Color.fromARGB(255, 4, 4, 4);
   static const Color yellowColor = Color.fromARGB(255, 255, 235, 59);

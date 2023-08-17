@@ -25,7 +25,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    homeScreenController.getHomeItem();
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),

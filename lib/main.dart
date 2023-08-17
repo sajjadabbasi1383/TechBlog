@@ -66,6 +66,11 @@ class MyApp extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: SolidColors.posterSubTitle),
+          labelSmall: TextStyle(
+              fontFamily: "dana",
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: SolidColors.posterTitle),
           titleLarge: TextStyle(
               fontFamily: "dana",
               fontSize: 15,

@@ -62,7 +62,7 @@ class MainTags extends StatelessWidget {
               ),
               Text(
                 taglist[index].title,
-                style: textTheme.titleMedium,
+                style: textTheme.labelSmall,
               ),
             ],
           ),

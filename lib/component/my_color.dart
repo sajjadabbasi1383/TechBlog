@@ -50,8 +50,8 @@ class GradientColors {
   ];
   static const List<Color> homePosterCoverGradiant = [
     Color.fromARGB(0, 0, 0, 0),
-    Color.fromARGB(195, 72, 20, 88),
-    Color.fromARGB(255, 280, 20, 81)
+    Color.fromARGB(185, 72, 20, 88),
+    Color.fromARGB(250, 280, 20, 81)
   ];
 
   static const List<Color> singleAppbarGradiant = [

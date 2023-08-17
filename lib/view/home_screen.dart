@@ -28,35 +28,41 @@ class HomeScreen extends StatelessWidget {
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Column(
-          children: [
-            HomePagePoster(size: size, textTheme: textTheme),
-            const SizedBox(
-              height: 11,
-            ),
-            HomePageTagList(bodyMargin: bodyMargin, textTheme: textTheme),
-            const SizedBox(
-              height: 13,
-            ),
-            SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme),
-            const SizedBox(
-              height: 11,
-            ),
-            topVisited(),
-            const SizedBox(
-              height: 13,
-            ),
-            SeeMorePodcast(bodyMargin: bodyMargin, textTheme: textTheme),
-            const SizedBox(
-              height: 11,
-            ),
-            topPodcast(),
-            const SizedBox(
-              height: 45,
-            ),
-          ],
+      child: Obx(
+          ()=> Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child:homeScreenController.loading.value==false? Column(
+              children: [
+                poster(),
+                const SizedBox(
+                  height: 11,
+                ),
+                HomePageTagList(bodyMargin: bodyMargin, textTheme: textTheme),
+                const SizedBox(
+                  height: 13,
+                ),
+                SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme),
+                const SizedBox(
+                  height: 11,
+                ),
+                topVisited(),
+                const SizedBox(
+                  height: 13,
+                ),
+                SeeMorePodcast(bodyMargin: bodyMargin, textTheme: textTheme),
+                const SizedBox(
+                  height: 11,
+                ),
+                topPodcast(),
+                const SizedBox(
+                  height: 45,
+                ),
+              ],
+            )
+              :const SpinKitFadingCube(
+            size: 45,
+            color: SolidColors.primaryColor,
+          )
         ),
       ),
     );
@@ -141,9 +147,9 @@ class HomeScreen extends StatelessWidget {
                             );
                           },
                           placeholder: (context, url) =>
-                              const SpinKitFadingCube(
+                              const SpinKitSpinningLines(
                             color: SolidColors.primaryColor,
-                            size: 30,
+                            size: 60,
                           ),
                           errorWidget: (context, url, error) => const Icon(
                             Icons.image_not_supported_outlined,
@@ -200,9 +206,9 @@ class HomeScreen extends StatelessWidget {
                                     image: imageProvider, fit: BoxFit.cover)),
                           );
                         },
-                        placeholder: (context, url) => const SpinKitFadingCube(
+                        placeholder: (context, url) => const SpinKitSpinningLines(
                           color: SolidColors.primaryColor,
-                          size: 30,
+                          size: 60,
                         ),
                         errorWidget: (context, url, error) => Container(
                           decoration: BoxDecoration(
@@ -230,6 +236,64 @@ class HomeScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget poster(){
+    return Stack(
+      children: [
+        Container(
+          width: size.width / 1.12,
+          height: size.height / 4.3,
+          foregroundDecoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+            gradient: LinearGradient(
+              colors: GradientColors.homePosterCoverGradiant,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: homeScreenController.poster.value.image!,
+            imageBuilder:(context, imageProvider) {
+              return Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(17),
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.cover)),
+                  ),
+
+                ],
+              );
+            },
+            placeholder: (context, url) => const SpinKitSpinningLines(
+              color: SolidColors.primaryColor,
+              size: 70,
+            ),
+            errorWidget: (context, url, error) => Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(17),
+                  color: SolidColors.greyColor2),
+              child: const Icon(
+                Icons.image_not_supported_outlined,
+                size: 50,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 8,
+          right: 30,
+          left: 25,
+          child: Text(
+            homeScreenController.poster.value.title!,
+            style: textTheme.headlineLarge,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -325,84 +389,6 @@ class HomePageTagList extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class HomePagePoster extends StatelessWidget {
-  const HomePagePoster({
-    super.key,
-    required this.size,
-    required this.textTheme,
-  });
-
-  final Size size;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: size.width / 1.12,
-          height: size.height / 4.3,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            image: DecorationImage(
-              image: homePagePosterMap["image"],
-              fit: BoxFit.cover,
-            ),
-          ),
-          foregroundDecoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-            gradient: LinearGradient(
-              colors: GradientColors.homePosterCoverGradiant,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 8,
-          right: 0,
-          left: 0,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    homePagePosterMap["writer"] +
-                        " - " +
-                        homePagePosterMap["date"],
-                    style: textTheme.titleMedium,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        homePagePosterMap["view"],
-                        style: textTheme.titleMedium,
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      const Icon(
-                        Icons.remove_red_eye_rounded,
-                        color: Colors.white,
-                        size: 15,
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              Text(
-                homePagePosterMap["title"],
-                style: textTheme.headlineLarge,
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

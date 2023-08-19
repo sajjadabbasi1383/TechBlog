@@ -76,3 +76,34 @@ myLaunchUrl(String url)async{
   var uri=Uri.parse(url);
     await launchUrl(uri);
 }
+
+PreferredSize appBar(TextTheme textTheme,String title) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(75),
+    child: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Center(child: Text(title,style: textTheme.titleSmall,)),
+          ),
+        ],
+        leading: Padding(
+          padding: const EdgeInsets.only(right: 15),
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+                color: SolidColors.primaryColor.withAlpha(150),
+                shape: BoxShape.circle
+            ),
+            child: const Icon(Icons.keyboard_arrow_right_rounded,size: 33,),
+          ),
+        ),
+      ),
+    ),
+  );
+}

@@ -95,7 +95,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home:   const ArticleListScreen(),
+      home:   ArticleListScreen(),
     );
   }
 }

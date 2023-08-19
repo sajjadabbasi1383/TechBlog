@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
 import '../gen/assets.gen.dart';
-import '../models/fake_data.dart';
 import 'my_color.dart';
 
 class CustomDivider extends StatelessWidget {
@@ -61,7 +62,7 @@ class MainTags extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                taglist[index].title,
+                Get.find<HomeScreenController>().tagList[index].title!,
                 style: textTheme.labelSmall,
               ),
             ],

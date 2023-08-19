@@ -3,7 +3,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
 import '../gen/assets.gen.dart';
 import 'package:get/get.dart';
-import '../models/fake_data.dart';
 import '../component/my_color.dart';
 import '../component/my_component.dart';
 import '../component/my_string.dart';
@@ -37,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 11,
                 ),
-                HomePageTagList(bodyMargin: bodyMargin, textTheme: textTheme),
+                tags(),
                 const SizedBox(
                   height: 13,
                 ),
@@ -296,6 +295,23 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
+
+  Widget tags(){
+    return SizedBox(
+      height: 56,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: homeScreenController.tagList.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.fromLTRB(5, 8, index == 0 ? bodyMargin : 5, 8),
+            child: MainTags(textTheme: textTheme, index: index),
+          );
+        },
+      ),
+    );
+  }
 }
 
 class SeeMorePodcast extends StatelessWidget {
@@ -359,35 +375,6 @@ class SeeMoreBlog extends StatelessWidget {
             style: textTheme.titleLarge,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class HomePageTagList extends StatelessWidget {
-  const HomePageTagList({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 56,
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: taglist.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(5, 8, index == 0 ? bodyMargin : 5, 8),
-            child: MainTags(textTheme: textTheme, index: index),
-          );
-        },
       ),
     );
   }

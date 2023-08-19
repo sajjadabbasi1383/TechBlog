@@ -92,6 +92,11 @@ class MyApp extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w800,
               color: SolidColors.hintText),
+          labelMedium: TextStyle(
+              fontFamily: "dana",
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: SolidColors.hintText),
         ),
       ),
       debugShowCheckedModeBanner: false,

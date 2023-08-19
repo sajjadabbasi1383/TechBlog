@@ -145,10 +145,9 @@ class HomeScreen extends StatelessWidget {
                               ],
                             );
                           },
-                          placeholder: (context, url) =>
-                              const SpinKitSpinningLines(
+                          placeholder: (context, url) => const SpinKitFadingCube(
                             color: SolidColors.primaryColor,
-                            size: 60,
+                            size: 27,
                           ),
                           errorWidget: (context, url, error) => const Icon(
                             Icons.image_not_supported_outlined,
@@ -205,9 +204,9 @@ class HomeScreen extends StatelessWidget {
                                     image: imageProvider, fit: BoxFit.cover)),
                           );
                         },
-                        placeholder: (context, url) => const SpinKitSpinningLines(
+                        placeholder: (context, url) => const SpinKitFadingCube(
                           color: SolidColors.primaryColor,
-                          size: 60,
+                          size: 27,
                         ),
                         errorWidget: (context, url, error) => Container(
                           decoration: BoxDecoration(

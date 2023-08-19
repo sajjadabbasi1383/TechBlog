@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tech_blog/view/article_list_sceen.dart';
+import 'package:tech_blog/view/article_single_screen.dart';
 import 'package:tech_blog/view/splash_screen.dart';
 
 import 'component/my_color.dart';
@@ -100,7 +101,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home:   ArticleListScreen(),
+      home:   ArticleSingleScreen(),
     );
   }
 }

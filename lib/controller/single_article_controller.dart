@@ -4,14 +4,13 @@ import '../component/api_constant.dart';
 import '../models/articles_model.dart';
 import '../services/dio_service.dart';
 
-class ArticleController extends GetxController{
-  RxList<ArticleModel> articleList=RxList();
+class SingleArticleController extends GetxController{
   RxBool loading=false.obs;
-
+  RxInt id=RxInt(0);
   @override
   onInit(){
     super.onInit();
-    getArticleList();
+
   }
 
   getArticleList() async {
@@ -19,7 +18,7 @@ class ArticleController extends GetxController{
     var response = await DioService().getMethod(ApiConstant.getArticleList);
     if (response.statusCode == 200) {
       response.data.forEach((element) {
-        articleList.add(ArticleModel.fromJson(element));
+
       });
       loading.value=false;
     }

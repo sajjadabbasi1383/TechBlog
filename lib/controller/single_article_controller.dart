@@ -1,25 +1,19 @@
 import 'package:get/get.dart';
 
 import '../component/api_constant.dart';
-import '../models/articles_model.dart';
+import '../models/article_info_model.dart';
 import '../services/dio_service.dart';
 
 class SingleArticleController extends GetxController{
   RxBool loading=false.obs;
   RxInt id=RxInt(0);
-  @override
-  onInit(){
-    super.onInit();
+  Rx<ArticleInfoModel> articleInfoModel=ArticleInfoModel().obs;
 
-  }
-
-  getArticleList() async {
+  getArticleInfo() async {
     loading.value=true;
-    var response = await DioService().getMethod(ApiConstant.getArticleList);
+    var response = await DioService().getMethod('${ApiConstant.baseUrl}article/get.php?command=info&id=$id&user_id=1');
     if (response.statusCode == 200) {
-      response.data.forEach((element) {
-
-      });
+      articleInfoModel.value=ArticleInfoModel.fromJson(response.data);
       loading.value=false;
     }
   }

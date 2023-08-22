@@ -100,7 +100,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home:   ArticleListScreen(),
+      home:   ArticleListScreen(title: "لیست مقالات",),
     );
   }
 }

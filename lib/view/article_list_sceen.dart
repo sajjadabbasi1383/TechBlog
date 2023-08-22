@@ -9,17 +9,18 @@ import '../component/my_component.dart';
 import '../controller/single_article_controller.dart';
 
 class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({super.key});
+  ArticleListScreen({required this.title,super.key});
 
   ListArticleController listArticleController = Get.put(ListArticleController());
   SingleArticleController singleArticleController = Get.put(SingleArticleController());
+  String title="لیست مقالات";
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return SafeArea(
         child: Scaffold(
-      appBar: appBar(textTheme, "لیست مقالات"),
+      appBar: appBar(textTheme, title),
       body: SizedBox(
         child: Obx(
           () => listArticleController.loading==false? ListView.builder(

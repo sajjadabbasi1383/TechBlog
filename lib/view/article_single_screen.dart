@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
+import 'package:tech_blog/controller/list_article_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
+import 'package:tech_blog/view/article_list_sceen.dart';
 
 import '../component/my_color.dart';
 import '../component/my_string.dart';
@@ -35,7 +37,15 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
         child: Scaffold(
       body: SingleChildScrollView(
         child: Obx(
-          () => Column(
+          () => singleArticleController.articleInfoModel.value.title==null?
+          SizedBox(
+            height: Get.height,
+            child: const SpinKitFadingCube(
+              color: SolidColors.primaryColor,
+              size: 40,
+            ),
+          )
+          :Column(
             children: [
               Stack(
                 children: [
@@ -44,10 +54,6 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                         singleArticleController.articleInfoModel.value.image!,
                     imageBuilder: (context, imageProvider) =>
                         Image(image: imageProvider),
-                    placeholder: (context, url) => const SpinKitFadingCube(
-                      color: SolidColors.primaryColor,
-                      size: 30,
-                    ),
                     errorWidget: (context, url, error) => Image.asset(
                       Assets.images.singlePlaceHolder.path,
                     ),
@@ -150,7 +156,8 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                   itemCount: singleArticleController.tagList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return Padding(
+                    return singleArticleController.tagList[index].id == '2'||singleArticleController.tagList[index].id == '6'
+                        ? Padding(
                       padding: EdgeInsets.fromLTRB(
                           5, 8, index == 0 ? bodyMargin : 5, 8),
                       child: Container(
@@ -158,15 +165,46 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                               borderRadius: BorderRadius.circular(18),
                               color: SolidColors.greyColor2),
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(16, 8, 10, 8),
+                            padding:
+                            const EdgeInsets.fromLTRB(16, 8, 10, 8),
                             child: Center(
                               child: Text(
-                                singleArticleController.tagList[index].title!,
+                                singleArticleController
+                                    .tagList[index].title!,
                                 style: textTheme.headlineMedium,
                               ),
                             ),
                           )),
-                    );
+                    )
+                        : GestureDetector(
+                            onTap: () async {
+                              var tagId =
+                                  singleArticleController.tagList[index].id!;
+                              var tagName="لیست مرتبط با ${singleArticleController.tagList[index].title!}";
+                              await Get.find<ListArticleController>()
+                                  .getArticleWithTag(tagId);
+                              Get.to(ArticleListScreen(title: tagName,));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                  5, 8, index == 0 ? bodyMargin : 5, 8),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(18),
+                                      color: SolidColors.greyColor2),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(16, 8, 10, 8),
+                                    child: Center(
+                                      child: Text(
+                                        singleArticleController
+                                            .tagList[index].title!,
+                                        style: textTheme.headlineMedium,
+                                      ),
+                                    ),
+                                  )),
+                            ),
+                          );
                   },
                 ),
               ),

@@ -14,6 +14,7 @@ class SingleArticleController extends GetxController{
   RxList<ArticleModel> releatedList=RxList();
 
   getArticleInfo() async {
+    articleInfoModel=ArticleInfoModel().obs;
     loading.value=true;
     var userId='';
     var response = await DioService().getMethod('${ApiConstant.baseUrl}article/get.php?command=info&id=$id&user_id=$userId');

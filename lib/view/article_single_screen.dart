@@ -8,7 +8,6 @@ import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/view/article_list_sceen.dart';
 
 import '../component/my_color.dart';
-import '../component/my_string.dart';
 import '../controller/single_article_controller.dart';
 
 class ArticleSingleScreen extends StatefulWidget {
@@ -21,6 +20,7 @@ class ArticleSingleScreen extends StatefulWidget {
 class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
   SingleArticleController singleArticleController =
       Get.put(SingleArticleController());
+  ListArticleController listArticleController=Get.put(ListArticleController());
 
   @override
   void initState() {
@@ -181,8 +181,7 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                               var tagId =
                                   singleArticleController.tagList[index].id!;
                               var tagName="لیست مرتبط با ${singleArticleController.tagList[index].title!}";
-                              await Get.find<ListArticleController>()
-                                  .getArticleWithTag(tagId);
+                              await listArticleController.getArticleWithTag(tagId);
                               Get.to(ArticleListScreen(title: tagName,));
                             },
                             child: Padding(
@@ -213,15 +212,8 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                     EdgeInsets.only(right: bodyMargin, top: 20, bottom: 11),
                 child: Row(
                   children: [
-                    ImageIcon(
-                      Assets.icons.bluePen.provider(),
-                      color: SolidColors.colorTitle,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
                     Text(
-                      MyStrings.viewHotestBlog,
+                      "مقالات مرتبط",
                       style: textTheme.titleLarge,
                     ),
                   ],
@@ -237,115 +229,123 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                     return singleArticleController.releatedList[index].author ==
                             null
                         ? const SizedBox.shrink()
-                        : Padding(
-                            padding: EdgeInsets.only(
-                                right: index == 0 ? bodyMargin : 8, left: 6),
-                            child: Column(
-                              children: [
-                                //blog item
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 7),
-                                  child: SizedBox(
-                                      width: size.width / 2.55,
-                                      height: size.height / 5.7,
-                                      child: CachedNetworkImage(
-                                        imageUrl: singleArticleController
-                                            .releatedList[index].image!,
-                                        imageBuilder: (context, imageProvider) {
-                                          return Stack(
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(17),
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
+                        : GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          singleArticleController.id.value=int.parse(singleArticleController.releatedList[index].id.toString());
+                          singleArticleController.getArticleInfo();
+                        });
+                      },
+                          child: Padding(
+                              padding: EdgeInsets.only(
+                                  right: index == 0 ? bodyMargin : 8, left: 6),
+                              child: Column(
+                                children: [
+                                  //blog item
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 7),
+                                    child: SizedBox(
+                                        width: size.width / 2.55,
+                                        height: size.height / 5.7,
+                                        child: CachedNetworkImage(
+                                          imageUrl: singleArticleController
+                                              .releatedList[index].image!,
+                                          imageBuilder: (context, imageProvider) {
+                                            return Stack(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(17),
+                                                    image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  foregroundDecoration:
+                                                      BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(17),
+                                                          gradient:
+                                                              const LinearGradient(
+                                                            colors: GradientColors
+                                                                .blogPost,
+                                                            begin: Alignment
+                                                                .bottomCenter,
+                                                            end: Alignment
+                                                                .topCenter,
+                                                          )),
+                                                ),
+                                                Positioned(
+                                                  bottom: 8,
+                                                  right: 0,
+                                                  left: 0,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      Text(
+                                                        singleArticleController
+                                                            .releatedList[index]
+                                                            .author!,
+                                                        style:
+                                                            textTheme.titleMedium,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            singleArticleController
+                                                                .releatedList[
+                                                                    index]
+                                                                .view!,
+                                                            style: textTheme
+                                                                .titleMedium,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 6,
+                                                          ),
+                                                          const Icon(
+                                                            Icons
+                                                                .remove_red_eye_rounded,
+                                                            color: Colors.white,
+                                                            size: 15,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                foregroundDecoration:
-                                                    BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(17),
-                                                        gradient:
-                                                            const LinearGradient(
-                                                          colors: GradientColors
-                                                              .blogPost,
-                                                          begin: Alignment
-                                                              .bottomCenter,
-                                                          end: Alignment
-                                                              .topCenter,
-                                                        )),
-                                              ),
-                                              Positioned(
-                                                bottom: 8,
-                                                right: 0,
-                                                left: 0,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceAround,
-                                                  children: [
-                                                    Text(
-                                                      singleArticleController
-                                                          .releatedList[index]
-                                                          .author!,
-                                                      style:
-                                                          textTheme.titleMedium,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          singleArticleController
-                                                              .releatedList[
-                                                                  index]
-                                                              .view!,
-                                                          style: textTheme
-                                                              .titleMedium,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 6,
-                                                        ),
-                                                        const Icon(
-                                                          Icons
-                                                              .remove_red_eye_rounded,
-                                                          color: Colors.white,
-                                                          size: 15,
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                        placeholder: (context, url) =>
-                                            const SpinKitFadingCube(
-                                          color: SolidColors.primaryColor,
-                                          size: 27,
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            const Icon(
-                                          Icons.image_not_supported_outlined,
-                                          size: 50,
-                                          color: Colors.grey,
-                                        ),
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: size.width / 2.55,
-                                  child: Text(
-                                    singleArticleController
-                                        .releatedList[index].title!,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                                              ],
+                                            );
+                                          },
+                                          placeholder: (context, url) =>
+                                              const SpinKitFadingCube(
+                                            color: SolidColors.primaryColor,
+                                            size: 27,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(
+                                            Icons.image_not_supported_outlined,
+                                            size: 50,
+                                            color: Colors.grey,
+                                          ),
+                                        )),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    width: size.width / 2.55,
+                                    child: Text(
+                                      singleArticleController
+                                          .releatedList[index].title!,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          );
+                        );
                   },
                 ),
               ),

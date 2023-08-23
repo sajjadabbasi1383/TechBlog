@@ -90,9 +90,7 @@ class RegisterIntro extends StatelessWidget {
                         controller: email,
                         style: textTheme.headlineSmall,
                         onChanged: (value) {
-                          print(value +
-                              " is Email: " +
-                              isEmail(value).toString());
+                          print("$value is Email: ${isEmail(value)}");
                         },
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
@@ -162,7 +160,7 @@ class RegisterIntro extends StatelessWidget {
                             {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => MyCats()));
+                                      builder: (context) => const MyCats()));
                             }
                           else{
                             showAlertCodeDialog(context);

@@ -91,16 +91,19 @@ PreferredSize appBar(TextTheme textTheme,String title) {
             child: Center(child: Text(title,style: textTheme.titleSmall,)),
           ),
         ],
-        leading: Padding(
-          padding: const EdgeInsets.only(right: 15),
-          child: Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-                color: SolidColors.primaryColor.withAlpha(150),
-                shape: BoxShape.circle
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: SolidColors.primaryColor.withAlpha(150),
+                  shape: BoxShape.circle
+              ),
+              child: const Icon(Icons.keyboard_arrow_right_rounded,size: 33,),
             ),
-            child: const Icon(Icons.keyboard_arrow_right_rounded,size: 33,),
           ),
         ),
       ),

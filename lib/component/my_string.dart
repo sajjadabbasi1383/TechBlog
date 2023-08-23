@@ -22,7 +22,11 @@ class MyStrings {
 اضافه نکردی !!!""";
   static const String shareText = """
 من از تکبلاگ استفاده میکنم ، خیلی باحاله ، تو هم داشته باش\n
-https://github.com/sajjadabbasi1383
+https://github.com/sajjadabbasi1383/TechBlog
+""";
+  static const String shareArticleText = """
+من این مقاله رو تو تکبلاگ خوندم خیلی باحال بود، تو هم حتما یک سر بزن\n
+\nhttps://github.com/sajjadabbasi1383/TechBlog
 """;
   static const String podcastEmpty = """  
 

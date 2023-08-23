@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/controller/list_article_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/view/article_list_sceen.dart';
+import 'package:tech_blog/view/article_list_screen.dart';
 
 import '../component/my_color.dart';
 import '../controller/single_article_controller.dart';
@@ -69,31 +71,39 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: GradientColors.singleAppbarGradiant)),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 18,
                             ),
-                            Icon(
-                              Icons.arrow_back,
-                              size: 26,
-                              color: Colors.white,
+                            GestureDetector(
+                              onTap: () => Get.back(),
+                              child: const Icon(
+                                Icons.arrow_back,
+                                size: 26,
+                                color: Colors.white,
+                              ),
                             ),
-                            Expanded(child: SizedBox()),
-                            Icon(
+                            const Expanded(child: SizedBox()),
+                            const Icon(
                               Icons.bookmark_outline,
                               size: 24,
                               color: Colors.white,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
-                            Icon(
-                              Icons.share,
-                              size: 21,
-                              color: Colors.white,
+                            GestureDetector(
+                              onTap: ()async {
+                                await Share.share('${singleArticleController.articleInfoModel.value.title!}\n\n${MyStrings.shareArticleText}');
+                              },
+                              child: const Icon(
+                                Icons.share,
+                                size: 21,
+                                color: Colors.white,
+                              ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
                           ],

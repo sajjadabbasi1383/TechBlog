@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/my_cats.dart';
@@ -20,8 +22,7 @@ class RegisterIntro extends StatelessWidget {
   final TextTheme textTheme;
   final double bodyMargin;
 
-  TextEditingController email = TextEditingController();
-  TextEditingController activateCode = TextEditingController();
+  RegisterController registerController=Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class RegisterIntro extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: TextField(
-                        controller: email,
+                        controller: registerController.emailTextEditingController,
                         style: textTheme.headlineSmall,
                         onChanged: (value) {
                           print("$value is Email: ${isEmail(value)}");
@@ -100,8 +101,9 @@ class RegisterIntro extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton(
-                        onPressed: () {
-                          if (isEmail(email.text)) {
+                        onPressed: () async{
+                          if (isEmail(registerController.emailTextEditingController.text)) {
+                            registerController.register();
                             Navigator.pop(context);
                             _showActiveCodeBottomSheet(
                                 context, size, textTheme);
@@ -145,7 +147,7 @@ class RegisterIntro extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: TextField(
-                        controller: activateCode,
+                        controller: registerController.activeCodeTextEditingController,
                         style: textTheme.headlineSmall,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
@@ -155,8 +157,9 @@ class RegisterIntro extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton(
-                        onPressed: () {
-                          if(activateCode.text=="1383")
+                        onPressed: ()async {
+                          registerController.verify();
+                          /*if(registerController.activeCodeTextEditingController.text=="1383")
                             {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
@@ -164,7 +167,7 @@ class RegisterIntro extends StatelessWidget {
                             }
                           else{
                             showAlertCodeDialog(context);
-                          }
+                          }*/
                         },
                         child: Text(MyStrings.continuation)),
                   ],

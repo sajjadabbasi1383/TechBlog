@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import '../gen/assets.gen.dart';
 import '../component/my_color.dart';
 import '../component/my_component.dart';
@@ -7,17 +8,14 @@ import '../component/my_string.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
     super.key,
-    required this.size,
-    required this.textTheme,
-    required this.bodyMargin,
   });
-
-  final Size size;
-  final TextTheme textTheme;
-  final double bodyMargin;
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
+    var size = MediaQuery.of(context).size;
+    var email=GetStorage().read('email')??MyStrings.tecEmail;
+    var name=GetStorage().read('nameFamily')??'سجاد عباسی';
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
@@ -51,14 +49,14 @@ class ProfileScreen extends StatelessWidget {
               height: 50,
             ),
             Text(
-              "سجاد عباسی",
+              name,
               style: textTheme.titleSmall,
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
-              "sajjadabbas0083@gmail.com",
+              email,
               style: textTheme.headlineMedium,
             ),
             const SizedBox(

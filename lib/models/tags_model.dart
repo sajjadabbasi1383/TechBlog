@@ -15,3 +15,5 @@ class TagsModel{
   }
 
 }
+
+List<TagsModel> selectedTags=[];

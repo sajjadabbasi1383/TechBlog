@@ -107,12 +107,8 @@ class MainScreen extends StatelessWidget {
               () => IndexedStack(
                 index: selectedPageIndex.value,
                 children: [
-                  HomeScreen(
-                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-                  RegisterIntro(
-                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-                  ProfileScreen(
-                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  HomeScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  const ProfileScreen(),
                 ],
               ),
             )),
@@ -188,11 +184,11 @@ class BottomNavBar extends StatelessWidget {
                         color: Colors.white,
                       )),
                   IconButton(
-                      onPressed: () => changeScreen(1),
+                      onPressed: () => Get.offAll(RegisterIntro()),
                       icon: ImageIcon(Assets.icons.write.provider(),
                           color: Colors.white)),
                   IconButton(
-                      onPressed: () => changeScreen(2),
+                      onPressed: () => changeScreen(1),
                       icon: ImageIcon(Assets.icons.user.provider(),
                           color: Colors.white)),
                 ],

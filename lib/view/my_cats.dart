@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tech_blog/models/fake_data.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/component/my_component.dart';
+import 'package:get/get.dart';
 import 'package:tech_blog/component/my_string.dart';
+import 'package:tech_blog/controller/register_controller.dart';
+import 'package:tech_blog/models/tags_model.dart';
 import 'package:tech_blog/view/main_screen.dart';
 
+import '../controller/home_screen_controller.dart';
 import '../gen/assets.gen.dart';
 import '../component/my_color.dart';
 
@@ -17,13 +22,20 @@ class MyCats extends StatefulWidget {
 }
 
 class _MyCatsState extends State<MyCats> {
-  TextEditingController nameFamily = TextEditingController();
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
+  RegisterController registerController = Get.put(RegisterController());
+  TextEditingController nameFamilyTextEditingController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
     double bodyMargin = size.width / 21;
+
+
+    var box=GetStorage();
+    box.write('nameFamily',nameFamilyTextEditingController.text);
+    RxBool myLoading = false.obs;
 
     return SafeArea(
         child: Scaffold(
@@ -50,7 +62,7 @@ class _MyCatsState extends State<MyCats> {
                   textAlign: TextAlign.center,
                 ),
                 TextField(
-                  controller: nameFamily,
+                  controller: nameFamilyTextEditingController,
                   textAlign: TextAlign.center,
                   style: textTheme.headlineSmall,
                   decoration: InputDecoration(
@@ -67,38 +79,51 @@ class _MyCatsState extends State<MyCats> {
                 ),
 
                 //tag list
-                Padding(
-                  padding: const EdgeInsets.only(top: 25),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 86,
-                    child: GridView.builder(
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: taglist.length,
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 6,
-                              mainAxisSpacing: 6,
-                              childAspectRatio: 0.27
-                              //childAspectRatio: 0.5
-                              ),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                            onTap: () {
-                              setState(() {
-                                if (!selectedTags.contains(taglist[index])) {
-                                  selectedTags.add(taglist[index]);
-                                }
-                              });
-                            },
-                            child:
-                                MainTags(textTheme: textTheme, index: index));
-                      },
-                    ),
-                  ),
+                Obx(
+                  () => myLoading.value==false
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 86,
+                            child: GridView.builder(
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: homeScreenController.tagList.length,
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 6,
+                                      mainAxisSpacing: 6,
+                                      childAspectRatio: 0.22
+                                      //childAspectRatio: 0.5
+                                      ),
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        if (!selectedTags.contains(
+                                            homeScreenController
+                                                .tagList[index])) {
+                                          selectedTags.add(homeScreenController
+                                              .tagList[index]);
+                                        }
+                                      });
+                                    },
+                                    child: MainTags(
+                                        textTheme: textTheme, index: index));
+                              },
+                            ),
+                          ),
+                        )
+                      : const Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: SpinKitFadingCube(
+                            color: SolidColors.primaryColor,
+                            size: 30,
+                          ),
+                      ),
                 ),
 
                 const SizedBox(
@@ -124,7 +149,7 @@ class _MyCatsState extends State<MyCats> {
                               crossAxisCount: 2,
                               crossAxisSpacing: 6,
                               mainAxisSpacing: 6,
-                              childAspectRatio: 0.27
+                              childAspectRatio: 0.22
                               //childAspectRatio: 0.5
                               ),
                       itemBuilder: (context, index) {
@@ -140,7 +165,7 @@ class _MyCatsState extends State<MyCats> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
-                                    selectedTags[index].title,
+                                    selectedTags[index].title!,
                                     style: textTheme.headlineMedium,
                                   ),
                                   InkWell(
@@ -161,18 +186,16 @@ class _MyCatsState extends State<MyCats> {
                     ),
                   ),
                 ),
-
                 const SizedBox(
                   height: 13,
                 ),
 
                 ElevatedButton(
                     onPressed: () {
-                      if (nameFamily.text == "") {
+                      if (nameFamilyTextEditingController.text == "") {
                         showAlertNameDialog(context);
                       } else {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => MainScreen()));
+                        Get.offAll(MainScreen());
                       }
                     },
                     child: const Text("ثبت")),

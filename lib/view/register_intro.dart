@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_string.dart';
-import 'package:tech_blog/view/my_cats.dart';
 import 'package:validators/validators.dart';
 
 
@@ -13,15 +12,7 @@ import 'package:validators/validators.dart';
 class RegisterIntro extends StatelessWidget {
    RegisterIntro({
     super.key,
-    required this.size,
-    required this.textTheme,
-    required this.bodyMargin,
   });
-
-  final Size size;
-  final TextTheme textTheme;
-  final double bodyMargin;
-
   RegisterController registerController=Get.put(RegisterController());
 
   @override
@@ -159,15 +150,6 @@ class RegisterIntro extends StatelessWidget {
                     ElevatedButton(
                         onPressed: ()async {
                           registerController.verify();
-                          /*if(registerController.activeCodeTextEditingController.text=="1383")
-                            {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (context) => const MyCats()));
-                            }
-                          else{
-                            showAlertCodeDialog(context);
-                          }*/
                         },
                         child: Text(MyStrings.continuation)),
                   ],

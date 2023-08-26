@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Obx(

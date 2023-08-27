@@ -184,7 +184,7 @@ class BottomNavBar extends StatelessWidget {
                         color: Colors.white,
                       )),
                   IconButton(
-                      onPressed: () => Get.offAll(RegisterIntro()),
+                      onPressed: () => Get.to(RegisterIntro()),
                       icon: ImageIcon(Assets.icons.write.provider(),
                           color: Colors.white)),
                   IconButton(

@@ -6,7 +6,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_string.dart';
-import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/models/tags_model.dart';
 import 'package:tech_blog/view/main_screen.dart';
 
@@ -23,7 +22,6 @@ class MyCats extends StatefulWidget {
 
 class _MyCatsState extends State<MyCats> {
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
-  RegisterController registerController = Get.put(RegisterController());
   TextEditingController nameFamilyTextEditingController=TextEditingController();
 
   @override

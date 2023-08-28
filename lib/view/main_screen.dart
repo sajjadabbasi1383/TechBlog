@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tech_blog/component/my_component.dart';
+import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_color.dart';
 import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/home_screen.dart';
 import 'package:tech_blog/view/profile_screen.dart';
-import 'package:tech_blog/view/register_intro.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-
-// ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
   RxInt selectedPageIndex = 0.obs;
-
   MainScreen({super.key});
 
   @override
@@ -146,7 +143,7 @@ class MainScreen extends StatelessWidget {
 }
 
 class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({
+  BottomNavBar({
     super.key,
     required this.bodyMarginNavBar,
     required this.size,
@@ -156,6 +153,8 @@ class BottomNavBar extends StatelessWidget {
   final double bodyMarginNavBar;
   final Size size;
   final Function(int) changeScreen;
+
+  RegisterController registerController=Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +183,7 @@ class BottomNavBar extends StatelessWidget {
                         color: Colors.white,
                       )),
                   IconButton(
-                      onPressed: () => Get.to(RegisterIntro()),
+                      onPressed: () => registerController.toggleLogin(),
                       icon: ImageIcon(Assets.icons.write.provider(),
                           color: Colors.white)),
                   IconButton(

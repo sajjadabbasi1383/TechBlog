@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/controller/single_article_controller.dart';
+import 'package:tech_blog/main.dart';
 import 'package:tech_blog/view/article_list_screen.dart';
 import '../controller/list_article_controller.dart';
 import '../gen/assets.gen.dart';
@@ -10,8 +11,6 @@ import '../component/my_color.dart';
 import '../component/my_component.dart';
 import '../component/my_string.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
-import 'article_single_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
@@ -93,7 +92,7 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 singleArticleController.id.value = int.parse(
                     homeScreenController.topVisitedList[index].id.toString());
-                Get.to(const ArticleSingleScreen());
+                Get.toNamed(routeSingleArticle);
               },
               child: Padding(
                 padding: EdgeInsets.only(

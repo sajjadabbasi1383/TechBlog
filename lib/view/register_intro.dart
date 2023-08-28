@@ -13,7 +13,7 @@ class RegisterIntro extends StatelessWidget {
    RegisterIntro({
     super.key,
   });
-  RegisterController registerController=Get.put(RegisterController());
+  var registerController=Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {

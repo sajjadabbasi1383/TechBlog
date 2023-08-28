@@ -20,8 +20,7 @@ class ArticleSingleScreen extends StatefulWidget {
 }
 
 class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
-  SingleArticleController singleArticleController =
-      Get.put(SingleArticleController());
+  var singleArticleController = Get.find<SingleArticleController>();
   ListArticleController listArticleController=Get.put(ListArticleController());
 
   @override

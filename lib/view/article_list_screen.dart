@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/controller/list_article_controller.dart';
-import 'package:tech_blog/view/article_single_screen.dart';
+import 'package:tech_blog/main.dart';
 import '../component/my_color.dart';
 import '../component/my_component.dart';
 import '../controller/single_article_controller.dart';
@@ -33,7 +33,7 @@ class ArticleListScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     singleArticleController.id.value=int.parse(listArticleController.articleList[index].id.toString());
-                    Get.to(const ArticleSingleScreen());
+                    Get.toNamed(routeSingleArticle);
                   },
                   child: Row(
                     children: [

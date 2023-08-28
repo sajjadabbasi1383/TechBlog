@@ -6,8 +6,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_string.dart';
+import 'package:tech_blog/main.dart';
 import 'package:tech_blog/models/tags_model.dart';
-import 'package:tech_blog/view/main_screen.dart';
 
 import '../controller/home_screen_controller.dart';
 import '../gen/assets.gen.dart';
@@ -32,7 +32,7 @@ class _MyCatsState extends State<MyCats> {
 
 
     var box=GetStorage();
-    box.write('nameFamily',nameFamilyTextEditingController.text);
+    nameFamilyTextEditingController.text==''?box.write('nameFamily','سجاد عباسی'):box.write('nameFamily',nameFamilyTextEditingController.text);
     RxBool myLoading = false.obs;
 
     return SafeArea(
@@ -193,7 +193,7 @@ class _MyCatsState extends State<MyCats> {
                       if (nameFamilyTextEditingController.text == "") {
                         showAlertNameDialog(context);
                       } else {
-                        Get.offAll(MainScreen());
+                        Get.offAllNamed(routeMainScreen);
                       }
                     },
                     child: const Text("ثبت")),

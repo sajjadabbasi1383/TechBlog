@@ -154,8 +154,6 @@ class BottomNavBar extends StatelessWidget {
   final Size size;
   final Function(int) changeScreen;
 
-  RegisterController registerController=Get.put(RegisterController());
-
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -183,7 +181,7 @@ class BottomNavBar extends StatelessWidget {
                         color: Colors.white,
                       )),
                   IconButton(
-                      onPressed: () => registerController.toggleLogin(),
+                      onPressed: () => Get.find<RegisterController>().toggleLogin(),
                       icon: ImageIcon(Assets.icons.write.provider(),
                           color: Colors.white)),
                   IconButton(

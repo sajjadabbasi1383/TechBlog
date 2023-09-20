@@ -77,10 +77,15 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                             ),
                             GestureDetector(
                               onTap: () => Get.back(),
-                              child: const Icon(
-                                Icons.arrow_back,
-                                size: 26,
-                                color: Colors.white,
+                              child: Container(
+                                color: Colors.transparent,
+                                width: 35,
+                                height: 35,
+                                child: const Icon(
+                                  Icons.arrow_back,
+                                  size: 26,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             const Expanded(child: SizedBox()),
@@ -96,10 +101,15 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                               onTap: ()async {
                                 await Share.share('${singleArticleController.articleInfoModel.value.title!}\n\n${MyStrings.shareArticleText}');
                               },
-                              child: const Icon(
-                                Icons.share,
-                                size: 21,
-                                color: Colors.white,
+                              child: Container(
+                                color: Colors.transparent,
+                                width: 35,
+                                height: 35,
+                                child: const Icon(
+                                  Icons.share,
+                                  size: 21,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             const SizedBox(

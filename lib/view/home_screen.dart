@@ -23,8 +23,8 @@ class HomeScreen extends StatelessWidget {
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
   SingleArticleController singleArticleController =
       Get.put(SingleArticleController());
-  ListArticleController listArticleController=Get.put(ListArticleController());
-
+  ListArticleController listArticleController =
+      Get.put(ListArticleController());
 
   final Size size;
   final TextTheme textTheme;
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(
                         height: 13,
                       ),
-                      SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme),
+                      seeMoreBlog(),
                       const SizedBox(
                         height: 11,
                       ),
@@ -57,8 +57,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(
                         height: 13,
                       ),
-                      SeeMorePodcast(
-                          bodyMargin: bodyMargin, textTheme: textTheme),
+                      seeMorePodcast(),
                       const SizedBox(
                         height: 11,
                       ),
@@ -324,14 +323,17 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () async {
-              var tagId =
-              homeScreenController.tagList[index].id!;
-              var tagName="لیست مرتبط با ${homeScreenController.tagList[index].title!}";
+              var tagId = homeScreenController.tagList[index].id!;
+              var tagName =
+                  "لیست مرتبط با ${homeScreenController.tagList[index].title!}";
               await listArticleController.getArticleWithTag(tagId);
-              Get.to(ArticleListScreen(title: tagName,));
+              Get.to(ArticleListScreen(
+                title: tagName,
+              ));
             },
             child: Padding(
-              padding: EdgeInsets.fromLTRB(5, 8, index == 0 ? bodyMargin : 5, 8),
+              padding:
+                  EdgeInsets.fromLTRB(5, 8, index == 0 ? bodyMargin : 5, 8),
               child: MainTags(textTheme: textTheme, index: index),
             ),
           );
@@ -339,53 +341,8 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class SeeMorePodcast extends StatelessWidget {
-  const SeeMorePodcast({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: bodyMargin),
-      child: Row(
-        children: [
-          ImageIcon(
-            Assets.icons.microphon.provider(),
-            color: SolidColors.colorTitle,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            MyStrings.viewHotestPodCasts,
-            style: textTheme.titleLarge,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SeeMoreBlog extends StatelessWidget {
-  const SeeMoreBlog({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget seeMoreBlog() {
     return GestureDetector(
       onTap: () => Get.to(ArticleListScreen(title: "لیست مقالات")),
       child: Padding(
@@ -405,6 +362,27 @@ class SeeMoreBlog extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget seeMorePodcast() {
+    return Padding(
+      padding: EdgeInsets.only(right: bodyMargin),
+      child: Row(
+        children: [
+          ImageIcon(
+            Assets.icons.microphon.provider(),
+            color: SolidColors.colorTitle,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            MyStrings.viewHotestPodCasts,
+            style: textTheme.titleLarge,
+          ),
+        ],
       ),
     );
   }

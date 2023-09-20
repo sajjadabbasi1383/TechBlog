@@ -30,9 +30,6 @@ class _MyCatsState extends State<MyCats> {
     var size = MediaQuery.of(context).size;
     double bodyMargin = size.width / 21;
 
-
-    var box=GetStorage();
-    nameFamilyTextEditingController.text==''?box.write('nameFamily','سجاد عباسی'):box.write('nameFamily',nameFamilyTextEditingController.text);
     RxBool myLoading = false.obs;
 
     return SafeArea(
@@ -193,6 +190,8 @@ class _MyCatsState extends State<MyCats> {
                       if (nameFamilyTextEditingController.text == "") {
                         showAlertNameDialog(context);
                       } else {
+                        var box=GetStorage();
+                        nameFamilyTextEditingController.text==''?box.write('nameFamily','سجاد عباسی'):box.write('nameFamily',nameFamilyTextEditingController.text);
                         Get.offAllNamed(routeMainScreen);
                       }
                     },

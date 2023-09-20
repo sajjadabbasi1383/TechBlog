@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/controller/register_controller.dart';
@@ -8,6 +9,7 @@ import 'package:tech_blog/component/my_color.dart';
 import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/home_screen.dart';
 import 'package:tech_blog/view/profile_screen.dart';
+import 'package:tech_blog/view/register_intro.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -87,9 +89,14 @@ class MainScreen extends StatelessWidget {
                 onTap: () {
                   _key.currentState!.openDrawer();
                 },
-                child: const Icon(
-                  Icons.menu,
-                  color: Colors.black,
+                child: Container(
+                  color: Colors.white,
+                  height: 25,
+                  width: 28,
+                  child: const Icon(
+                    Icons.menu,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               Assets.images.logo.image(height: size.height / 15),
@@ -185,7 +192,13 @@ class BottomNavBar extends StatelessWidget {
                       icon: ImageIcon(Assets.icons.write.provider(),
                           color: Colors.white)),
                   IconButton(
-                      onPressed: () => changeScreen(1),
+                      onPressed: (){
+                          if (GetStorage().read('token') == null) {
+                            Get.to(RegisterIntro());
+                          } else {
+                            changeScreen(1);
+                          }
+                      },
                       icon: ImageIcon(Assets.icons.user.provider(),
                           color: Colors.white)),
                 ],

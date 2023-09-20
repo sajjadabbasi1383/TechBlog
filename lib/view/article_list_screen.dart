@@ -36,7 +36,11 @@ class ArticleListScreen extends StatelessWidget {
                     Get.toNamed(routeSingleArticle);
                   },
                   child: Container(
-                    color: Colors.white,
+
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(17))
+                    ),
                     child: Row(
                       children: [
                         SizedBox(

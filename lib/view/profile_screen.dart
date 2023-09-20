@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tech_blog/controller/register_controller.dart';
+import 'package:tech_blog/view/my_cats.dart';
 import '../gen/assets.gen.dart';
 import '../component/my_color.dart';
 import '../component/my_component.dart';
@@ -46,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 50,
+              height: 35,
             ),
             Text(
               name,
@@ -60,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
               style: textTheme.headlineMedium,
             ),
             const SizedBox(
-              height: 35,
+              height: 30,
             ),
             CustomDivider(size: size),
             InkWell(
@@ -92,7 +95,25 @@ class ProfileScreen extends StatelessWidget {
             ),
             CustomDivider(size: size),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.to(const MyCats());
+              },
+              splashColor: SolidColors.primaryColor,
+              child: SizedBox(
+                height: 45,
+                width: size.width / 1.17,
+                child: Center(
+                    child: Text(
+                      MyStrings.editeUserName,
+                      style: textTheme.headlineMedium,
+                    )),
+              ),
+            ),
+            CustomDivider(size: size),
+            InkWell(
+              onTap: () {
+                Get.find<RegisterController>().logOut();
+              },
               splashColor: SolidColors.primaryColor,
               child: SizedBox(
                 height: 45,
@@ -105,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 130,
+              height: 60,
             ),
           ],
         ),

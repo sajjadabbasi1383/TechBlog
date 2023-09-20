@@ -51,7 +51,7 @@ class RegisterController extends GetxController {
         debugPrint("read::::"+box.read('token').toString());
         debugPrint("read::::"+box.read('email').toString());
         debugPrint("read::::"+box.read('user_id').toString());
-        Get.offAll(const MyCats());
+        Get.off(const MyCats());
         break;
       case 'incorrect_code':
         Get.snackbar('خطا', "کد فعالسازی غلط است");
@@ -62,6 +62,14 @@ class RegisterController extends GetxController {
     }
   }
 
+  logOut(){
+    GetStorage().remove('token');
+    GetStorage().remove('email');
+    GetStorage().remove('user_id');
+    GetStorage().remove('nameFamily');
+    Get.offAllNamed('/MainScreen');
+  }
+
   toggleLogin() {
     if (GetStorage().read('token') == null) {
       Get.to(RegisterIntro());
@@ -69,7 +77,6 @@ class RegisterController extends GetxController {
       routeToWriteBottomShit();
     }
   }
-
 
   routeToWriteBottomShit(){
     Get.bottomSheet(

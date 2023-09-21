@@ -136,12 +136,11 @@ class ProfileScreen extends StatelessWidget {
 }
 
 showLogOutAlertDialog(BuildContext context) {
-  var textTheme = Theme.of(context).textTheme;
   // set up the button
   Widget okButton = TextButton(
-    child: Text(
+    child: const Text(
       "خارج شدن",
-      style: textTheme.headlineLarge,
+      style: TextStyle(fontSize: 16,color: Colors.red,fontWeight: FontWeight.bold)
     ),
     onPressed: () {
       Get.find<RegisterController>().logOut();
@@ -149,9 +148,9 @@ showLogOutAlertDialog(BuildContext context) {
   );
 
   Widget cancelButton = TextButton(
-    child: Text(
+    child: const Text(
       "نه، دستم خورد!",
-      style: textTheme.headlineLarge,
+      style: TextStyle(fontSize: 16,color: Colors.green,fontWeight: FontWeight.bold)
     ),
     onPressed: () {
       Navigator.pop(context);
@@ -160,10 +159,9 @@ showLogOutAlertDialog(BuildContext context) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    backgroundColor: SolidColors.primaryColor,
-    title: Text(
+    title: const Text(
       "آیا می خواهید از حساب کاربری تان خارج شوید؟",
-      style: textTheme.headlineLarge,
+      style: TextStyle(fontSize: 16,color: SolidColors.primaryColor,)
     ),
     actions: [
       okButton,

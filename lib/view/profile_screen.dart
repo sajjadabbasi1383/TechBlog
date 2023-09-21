@@ -112,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
             CustomDivider(size: size),
             InkWell(
               onTap: () {
-                Get.find<RegisterController>().logOut();
+                showLogOutAlertDialog(context);
               },
               splashColor: SolidColors.primaryColor,
               child: SizedBox(
@@ -134,3 +134,49 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+
+showLogOutAlertDialog(BuildContext context) {
+  var textTheme = Theme.of(context).textTheme;
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text(
+      "خارج شدن",
+      style: textTheme.headlineLarge,
+    ),
+    onPressed: () {
+      Get.find<RegisterController>().logOut();
+    },
+  );
+
+  Widget cancelButton = TextButton(
+    child: Text(
+      "نه، دستم خورد!",
+      style: textTheme.headlineLarge,
+    ),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    backgroundColor: SolidColors.primaryColor,
+    title: Text(
+      "آیا می خواهید از حساب کاربری تان خارج شوید؟",
+      style: textTheme.headlineLarge,
+    ),
+    actions: [
+      okButton,
+      cancelButton
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+

@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/component/api_constant.dart';
 import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
+import 'package:tech_blog/models/tags_model.dart';
 import 'package:tech_blog/services/dio_service.dart';
 import 'package:tech_blog/view/my_cats_screen.dart';
 import 'package:tech_blog/view/register_screen.dart';
@@ -18,6 +19,9 @@ class RegisterController extends GetxController {
       TextEditingController();
   var email = '';
   var userId = '';
+  var tokenResponse='';
+  var userIdResponse='';
+  var box = GetStorage();
 
   register() async {
     Map<String, dynamic> map = {
@@ -45,14 +49,10 @@ class RegisterController extends GetxController {
 
     switch (status) {
       case 'verified':
-        var box = GetStorage();
-        box.write('token', response.data['token']);
         box.write('email', email);
-        box.write('user_id', response.data['user_id']);
+        tokenResponse=response.data['token'];
+        userIdResponse=response.data['user_id'];
 
-        debugPrint("read::::"+box.read('token').toString());
-        debugPrint("read::::"+box.read('email').toString());
-        debugPrint("read::::"+box.read('user_id').toString());
         Get.off(const MyCats());
         break;
       case 'incorrect_code':
@@ -64,11 +64,24 @@ class RegisterController extends GetxController {
     }
   }
 
+  completeRegistration(){
+
+    box.write('token', tokenResponse);
+    box.write('user_id', userIdResponse);
+
+    debugPrint("read::::"+box.read('token').toString());
+    debugPrint("read::::"+box.read('email').toString());
+    debugPrint("read::::"+box.read('user_id').toString());
+
+    Get.offAllNamed(NamedRoute.routeMainScreen);
+  }
+
   logOut(){
     GetStorage().remove('token');
     GetStorage().remove('email');
     GetStorage().remove('user_id');
     GetStorage().remove('nameFamily');
+    selectedTags.clear();
     Get.offAllNamed('/MainScreen');
   }
 

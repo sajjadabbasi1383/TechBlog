@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_string.dart';
-import 'package:tech_blog/main.dart';
+import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/models/tags_model.dart';
 
 import '../controller/home_screen_controller.dart';
@@ -192,7 +192,7 @@ class _MyCatsState extends State<MyCats> {
                       } else {
                         var box=GetStorage();
                         nameFamilyTextEditingController.text==''?box.write('nameFamily','سجاد عباسی'):box.write('nameFamily',nameFamilyTextEditingController.text);
-                        Get.offAllNamed(NamedRoute.routeMainScreen);
+                        Get.find<RegisterController>().completeRegistration();
                       }
                     },
                     child: const Text("ثبت")),

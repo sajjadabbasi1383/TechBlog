@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/binding.dart';
 import 'package:tech_blog/view/article_single_screen.dart';
 import 'package:tech_blog/view/main_screen.dart';
+import 'package:tech_blog/view/manage_article_screen.dart';
 import 'package:tech_blog/view/splash_screen.dart';
 
 import 'component/my_color.dart';
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       
       getPages: [
-        GetPage(name: routeMainScreen, page: ()=>MainScreen(),binding: RegisterBinding()),
-        GetPage(name: routeSingleArticle, page: ()=>const ArticleSingleScreen(),binding: ArticleBinding()),
+        GetPage(name: NamedRoute.routeMainScreen, page: ()=>MainScreen(),binding: RegisterBinding()),
+        GetPage(name: NamedRoute.routeSingleArticle, page: ()=>const ArticleSingleScreen(),binding: ArticleBinding()),
+        GetPage(name: NamedRoute.routeManageArticle, page: ()=> ManageArticle(),binding: ArticleManagerBinding()),
       ],
       
       home: const SplashScreen(),
@@ -111,6 +113,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class NamedRoute{
+  static String routeMainScreen='/MainScreen';
+  static String routeSingleArticle='/SingleArticle';
+  static String routeManageArticle='/ManageArticle';
+}
 
-const String routeMainScreen='/MainScreen';
-const String routeSingleArticle='/SingleArticle';

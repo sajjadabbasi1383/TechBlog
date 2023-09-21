@@ -7,8 +7,10 @@ import 'package:tech_blog/component/api_constant.dart';
 import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/services/dio_service.dart';
-import 'package:tech_blog/view/my_cats.dart';
-import 'package:tech_blog/view/register_intro.dart';
+import 'package:tech_blog/view/my_cats_screen.dart';
+import 'package:tech_blog/view/register_screen.dart';
+
+import '../main.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailTextEditingController = TextEditingController();
@@ -108,7 +110,7 @@ class RegisterController extends GetxController {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
-                    onTap: ()=>debugPrint("manage article"),
+                    onTap: ()=>Get.toNamed(NamedRoute.routeManageArticle),
                     child: Container(
                       color: Colors.white,
                       child: Row(

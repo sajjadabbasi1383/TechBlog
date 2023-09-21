@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/controller/register_controller.dart';
-import 'package:tech_blog/view/my_cats.dart';
+import 'package:tech_blog/view/my_cats_screen.dart';
 import '../gen/assets.gen.dart';
 import '../component/my_color.dart';
 import '../component/my_component.dart';

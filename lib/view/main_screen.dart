@@ -9,7 +9,7 @@ import 'package:tech_blog/component/my_color.dart';
 import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/home_screen.dart';
 import 'package:tech_blog/view/profile_screen.dart';
-import 'package:tech_blog/view/register_intro.dart';
+import 'package:tech_blog/view/register_screen.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 

@@ -192,7 +192,7 @@ class _MyCatsState extends State<MyCats> {
                       } else {
                         var box=GetStorage();
                         nameFamilyTextEditingController.text==''?box.write('nameFamily','سجاد عباسی'):box.write('nameFamily',nameFamilyTextEditingController.text);
-                        Get.offAllNamed(routeMainScreen);
+                        Get.offAllNamed(NamedRoute.routeMainScreen);
                       }
                     },
                     child: const Text("ثبت")),

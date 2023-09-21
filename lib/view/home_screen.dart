@@ -32,7 +32,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Obx(
@@ -91,7 +90,7 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 singleArticleController.id.value = int.parse(
                     homeScreenController.topVisitedList[index].id.toString());
-                Get.toNamed(routeSingleArticle);
+                Get.toNamed(NamedRoute.routeSingleArticle);
               },
               child: Padding(
                 padding: EdgeInsets.only(

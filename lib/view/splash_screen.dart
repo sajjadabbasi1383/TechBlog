@@ -102,7 +102,7 @@ Future<bool> isInternetConnected() async {
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      Get.offAllNamed(routeMainScreen);
+      Get.offAllNamed(NamedRoute.routeMainScreen);
       return true;
     } else {
       return false;

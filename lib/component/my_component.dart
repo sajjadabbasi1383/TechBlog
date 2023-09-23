@@ -110,3 +110,24 @@ PreferredSize appBar(TextTheme textTheme,String title) {
     ),
   );
 }
+
+Widget seeMore(var bodyMargin,var textTheme,String title) {
+  return Padding(
+    padding: EdgeInsets.only(right: bodyMargin),
+    child: Row(
+      children: [
+        ImageIcon(
+          Assets.icons.bluePen.provider(),
+          color: SolidColors.colorTitle,
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Text(
+          title,
+          style: textTheme.titleLarge,
+        ),
+      ],
+    ),
+  );
+}

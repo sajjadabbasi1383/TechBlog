@@ -14,7 +14,7 @@ class ArticleBinding implements Bindings {
 class ArticleManagerBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(ManageArticleController());
+    Get.lazyPut(() => ManageArticleController());
   }
 }
 

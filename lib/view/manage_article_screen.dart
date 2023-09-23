@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/controller/manage_article_controller.dart';
-import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_string.dart';
-import 'package:validators/validators.dart';
+import 'package:tech_blog/main.dart';
 
 import '../component/my_color.dart';
 
@@ -30,7 +28,9 @@ class ManageArticle extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(19,10,19,19),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(NamedRoute.routeArticleSingleManage);
+          },
           child: Text(MyStrings.textManageArticle),
         ),
       ),

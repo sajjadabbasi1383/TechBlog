@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: NamedRoute.routeMainScreen, page: ()=>MainScreen(),binding: RegisterBinding()),
         GetPage(name: NamedRoute.routeSingleArticle, page: ()=>const ArticleSingleScreen(),binding: ArticleBinding()),
         GetPage(name: NamedRoute.routeManageArticle, page: ()=> ManageArticle(),binding: ArticleManagerBinding()),
-        GetPage(name: NamedRoute.routeArticleSingleManage, page: ()=> const ArticleSingleManageScreen(),binding: ArticleManagerBinding()),
+        GetPage(name: NamedRoute.routeArticleSingleManage, page: ()=>  ArticleSingleManageScreen(),binding: ArticleManagerBinding()),
       ],
       
       home: const SplashScreen(),

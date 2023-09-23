@@ -13,7 +13,7 @@ class ArticleListScreen extends StatelessWidget {
 
   final ListArticleController listArticleController = Get.put(ListArticleController());
   final SingleArticleController singleArticleController = Get.put(SingleArticleController());
-  String title="لیست مقالات";
+  final String title;
 
   @override
   Widget build(BuildContext context) {

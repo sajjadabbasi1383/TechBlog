@@ -122,7 +122,7 @@ class RegisterController extends GetxController {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
-                    onTap: ()=>Get.toNamed(NamedRoute.routeManageArticle),
+                    onTap: ()=>Get.offNamed(NamedRoute.routeManageArticle),
                     child: Container(
                       color: Colors.white,
                       child: Row(

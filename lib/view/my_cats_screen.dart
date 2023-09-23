@@ -22,8 +22,8 @@ class MyCats extends StatefulWidget {
 }
 
 class _MyCatsState extends State<MyCats> {
-  HomeScreenController homeScreenController = Get.put(HomeScreenController());
-  TextEditingController nameFamilyTextEditingController=TextEditingController();
+  final HomeScreenController homeScreenController = Get.put(HomeScreenController());
+  final TextEditingController nameFamilyTextEditingController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {

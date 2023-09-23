@@ -11,9 +11,9 @@ import '../../controller/article/single_article_controller.dart';
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({required this.title,super.key});
 
-  ListArticleController listArticleController = Get.put(ListArticleController());
-  SingleArticleController singleArticleController = Get.put(SingleArticleController());
-   String title="لیست مقالات";
+  final ListArticleController listArticleController = Get.put(ListArticleController());
+  final SingleArticleController singleArticleController = Get.put(SingleArticleController());
+  String title="لیست مقالات";
 
   @override
   Widget build(BuildContext context) {

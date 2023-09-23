@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/view/my_cats_screen.dart';
+import '../constant/dimens.dart';
 import '../gen/assets.gen.dart';
-import '../component/my_color.dart';
+import '../constant/my_color.dart';
 import '../component/my_component.dart';
-import '../component/my_string.dart';
+import '../constant/my_string.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
@@ -16,7 +17,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
     var email=GetStorage().read('email')??MyStrings.tecEmail;
     var name=GetStorage().read('nameFamily')??'سجاد عباسی';
     return SingleChildScrollView(
@@ -65,13 +65,13 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            CustomDivider(size: size),
+            const CustomDivider(),
             InkWell(
               onTap: () {},
               splashColor: SolidColors.primaryColor,
               child: SizedBox(
                 height: 45,
-                width: size.width / 1.17,
+                width: Dimens.size.width / 1.17,
                 child: Center(
                     child: Text(
                   MyStrings.myFavBlog,
@@ -79,13 +79,13 @@ class ProfileScreen extends StatelessWidget {
                 )),
               ),
             ),
-            CustomDivider(size: size),
+            const CustomDivider(),
             InkWell(
               onTap: () {},
               splashColor: SolidColors.primaryColor,
               child: SizedBox(
                 height: 45,
-                width: size.width / 1.17,
+                width: Dimens.size.width / 1.17,
                 child: Center(
                     child: Text(
                   MyStrings.myFavPodcast,
@@ -93,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
                 )),
               ),
             ),
-            CustomDivider(size: size),
+            const CustomDivider(),
             InkWell(
               onTap: () {
                 Get.to(const MyCats());
@@ -101,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
               splashColor: SolidColors.primaryColor,
               child: SizedBox(
                 height: 45,
-                width: size.width / 1.17,
+                width: Dimens.size.width / 1.17,
                 child: Center(
                     child: Text(
                       MyStrings.editeUserName,
@@ -109,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
                     )),
               ),
             ),
-            CustomDivider(size: size),
+            const CustomDivider(),
             InkWell(
               onTap: () {
                 showLogOutAlertDialog(context);
@@ -117,7 +117,7 @@ class ProfileScreen extends StatelessWidget {
               splashColor: SolidColors.primaryColor,
               child: SizedBox(
                 height: 45,
-                width: size.width / 1.17,
+                width: Dimens.size.width / 1.17,
                 child: Center(
                     child: Text(
                   MyStrings.logOut,

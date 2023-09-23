@@ -5,23 +5,21 @@ import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
+import '../constant/dimens.dart';
+import '../constant/my_color.dart';
 import '../gen/assets.gen.dart';
-import 'my_color.dart';
 
 class CustomDivider extends StatelessWidget {
   const CustomDivider({
     super.key,
-    required this.size,
   });
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
     return Divider(
       color: SolidColors.dividerColor,
-      indent: size.width/7,
-      endIndent: size.width/7,
+      indent: Dimens.size.width/7,
+      endIndent: Dimens.size.width/7,
       thickness: 1.2,
     );
   }
@@ -111,9 +109,9 @@ PreferredSize appBar(TextTheme textTheme,String title) {
   );
 }
 
-Widget seeMore(var bodyMargin,var textTheme,String title) {
+Widget seeMore(var textTheme,String title) {
   return Padding(
-    padding: EdgeInsets.only(right: bodyMargin),
+    padding: EdgeInsets.only(right: Dimens.bodyMargin),
     child: Row(
       children: [
         ImageIcon(

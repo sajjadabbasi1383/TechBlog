@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
-import 'package:tech_blog/component/my_string.dart';
+import 'package:tech_blog/constant/my_string.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 
-import '../component/my_color.dart';
-import '../component/my_component.dart';
-import '../controller/manage_article_controller.dart';
+import '../../component/my_component.dart';
+import '../../constant/dimens.dart';
+import '../../constant/my_color.dart';
+import '../../controller/article/manage_article_controller.dart';
+
+
 
 class ArticleSingleManageScreen extends StatefulWidget {
   const ArticleSingleManageScreen({super.key});
@@ -23,9 +26,7 @@ class _ArticleSingleManageScreenState extends State<ArticleSingleManageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
-    double bodyMargin = size.width / 21;
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
@@ -105,9 +106,9 @@ class _ArticleSingleManageScreenState extends State<ArticleSingleManageScreen> {
               const SizedBox(
                 height: 20,
               ),
-              seeMore(bodyMargin,textTheme,MyStrings.editTitleArticle),
+              seeMore(textTheme,MyStrings.editTitleArticle),
               Padding(
-                padding:  EdgeInsets.fromLTRB(bodyMargin,7,bodyMargin,25),
+                padding:  EdgeInsets.fromLTRB(Dimens.bodyMargin,7,Dimens.bodyMargin,25),
                 child: Text(
                   manageArticleController.articleInfoModel.value.title!,
                   style: textTheme.labelLarge,
@@ -115,9 +116,9 @@ class _ArticleSingleManageScreenState extends State<ArticleSingleManageScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              seeMore(bodyMargin,textTheme,MyStrings.editMainTextArticle),
+              seeMore(textTheme,MyStrings.editMainTextArticle),
               Padding(
-                padding:  EdgeInsets.fromLTRB(bodyMargin,7,bodyMargin,25),
+                padding:  EdgeInsets.fromLTRB(Dimens.bodyMargin,7,Dimens.bodyMargin,25),
                 child: HtmlWidget(
                   textStyle: const TextStyle(fontSize: 16,),
                   manageArticleController.articleInfoModel.value.content!,
@@ -129,7 +130,7 @@ class _ArticleSingleManageScreenState extends State<ArticleSingleManageScreen> {
                   ),
                 ),
               ),
-              seeMore(bodyMargin,textTheme,MyStrings.selectCategory),
+              seeMore(textTheme,MyStrings.selectCategory),
 
 
               //tag list
@@ -144,7 +145,7 @@ class _ArticleSingleManageScreenState extends State<ArticleSingleManageScreen> {
                             manageArticleController.tagList[index].id == '6'
                         ? Padding(
                             padding: EdgeInsets.fromLTRB(
-                                5, 8, index == 0 ? bodyMargin : 5, 8),
+                                5, 8, index == 0 ? Dimens.bodyMargin : 5, 8),
                             child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(18),
@@ -163,7 +164,7 @@ class _ArticleSingleManageScreenState extends State<ArticleSingleManageScreen> {
                           )
                         : Padding(
                             padding: EdgeInsets.fromLTRB(
-                                5, 8, index == 0 ? bodyMargin : 5, 8),
+                                5, 8, index == 0 ? Dimens.bodyMargin : 5, 8),
                             child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(18),

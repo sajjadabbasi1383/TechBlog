@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
-import 'package:tech_blog/controller/single_article_controller.dart';
 import 'package:tech_blog/main.dart';
-import 'package:tech_blog/view/article_list_screen.dart';
-import '../controller/list_article_controller.dart';
+import 'package:tech_blog/view/article/article_list_screen.dart';
+import '../constant/dimens.dart';
+import '../controller/article/list_article_controller.dart';
+import '../controller/article/single_article_controller.dart';
 import '../gen/assets.gen.dart';
 import 'package:get/get.dart';
-import '../component/my_color.dart';
+import '../constant/my_color.dart';
 import '../component/my_component.dart';
-import '../component/my_string.dart';
+import '../constant/my_string.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     super.key,
-    required this.size,
     required this.textTheme,
-    required this.bodyMargin,
   });
 
-  HomeScreenController homeScreenController = Get.put(HomeScreenController());
-  SingleArticleController singleArticleController =
+   HomeScreenController homeScreenController = Get.put(HomeScreenController());
+   SingleArticleController singleArticleController =
       Get.put(SingleArticleController());
-  ListArticleController listArticleController =
+   ListArticleController listArticleController =
       Get.put(ListArticleController());
 
-  final Size size;
   final TextTheme textTheme;
-  final double bodyMargin;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +76,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget topVisited() {
     return SizedBox(
-      height: size.height / 3.8,
+      height: Dimens.size.height / 3.8,
       child: Obx(
         () => ListView.builder(
           physics: const BouncingScrollPhysics(),
@@ -94,15 +91,15 @@ class HomeScreen extends StatelessWidget {
               },
               child: Padding(
                 padding: EdgeInsets.only(
-                    right: index == 0 ? bodyMargin : 8, left: 6),
+                    right: index == 0 ? Dimens.bodyMargin : 8, left: 6),
                 child: Column(
                   children: [
                     //blog item
                     Padding(
                       padding: const EdgeInsets.only(bottom: 7),
                       child: SizedBox(
-                          width: size.width / 2.55,
-                          height: size.height / 5.7,
+                          width: Dimens.size.width / 2.55,
+                          height: Dimens.size.height / 5.7,
                           child: CachedNetworkImage(
                             imageUrl: homeScreenController
                                 .topVisitedList[index].image!,
@@ -174,7 +171,7 @@ class HomeScreen extends StatelessWidget {
                           )),
                     ),
                     SizedBox(
-                      width: size.width / 2.55,
+                      width: Dimens.size.width / 2.55,
                       child: Text(
                         homeScreenController.topVisitedList[index].title!,
                         maxLines: 2,
@@ -193,7 +190,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget topPodcast() {
     return SizedBox(
-      height: size.height / 3.8,
+      height: Dimens.size.height / 3.8,
       child: Obx(
         () => ListView.builder(
           physics: const BouncingScrollPhysics(),
@@ -202,15 +199,15 @@ class HomeScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding:
-                  EdgeInsets.only(right: index == 0 ? bodyMargin : 8, left: 6),
+                  EdgeInsets.only(right: index == 0 ? Dimens.bodyMargin : 8, left: 6),
               child: Column(
                 children: [
                   //blog item
                   Padding(
                     padding: const EdgeInsets.only(bottom: 7),
                     child: SizedBox(
-                      width: size.width / 2.55,
-                      height: size.height / 5.7,
+                      width: Dimens.size.width / 2.55,
+                      height: Dimens.size.height / 5.7,
                       child: CachedNetworkImage(
                         imageUrl:
                             homeScreenController.topPodcastList[index].poster!,
@@ -240,7 +237,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: size.width / 2.55,
+                    width: Dimens.size.width / 2.55,
                     child: Text(
                       homeScreenController.topPodcastList[index].title!,
                       textAlign: TextAlign.center,
@@ -259,8 +256,8 @@ class HomeScreen extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: size.width / 1.12,
-          height: size.height / 4.3,
+          width: Dimens.size.width / 1.12,
+          height: Dimens.size.height / 4.3,
           foregroundDecoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(16)),
             gradient: LinearGradient(
@@ -332,7 +329,7 @@ class HomeScreen extends StatelessWidget {
             },
             child: Padding(
               padding:
-                  EdgeInsets.fromLTRB(5, 8, index == 0 ? bodyMargin : 5, 8),
+                  EdgeInsets.fromLTRB(5, 8, index == 0 ? Dimens.bodyMargin : 5, 8),
               child: MainTags(textTheme: textTheme, index: index),
             ),
           );
@@ -343,9 +340,12 @@ class HomeScreen extends StatelessWidget {
 
   Widget seeMoreBlog() {
     return GestureDetector(
-      onTap: () => Get.to(ArticleListScreen(title: "لیست مقالات")),
+      onTap: ()async {
+        await listArticleController.getArticleList();
+        Get.to(ArticleListScreen(title: "لیست مقالات"));
+      },
       child: Padding(
-        padding: EdgeInsets.only(right: bodyMargin),
+        padding: EdgeInsets.only(right: Dimens.bodyMargin),
         child: Row(
           children: [
             ImageIcon(
@@ -367,7 +367,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget seeMorePodcast() {
     return Padding(
-      padding: EdgeInsets.only(right: bodyMargin),
+      padding: EdgeInsets.only(right: Dimens.bodyMargin),
       child: Row(
         children: [
           ImageIcon(

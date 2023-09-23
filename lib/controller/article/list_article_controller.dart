@@ -1,20 +1,17 @@
 import 'package:get/get.dart';
 
-import '../component/api_constant.dart';
-import '../models/articles_model.dart';
-import '../services/dio_service.dart';
+import '../../constant/api_constant.dart';
+import '../../models/articles_model.dart';
+import '../../services/dio_service.dart';
 
 class ListArticleController extends GetxController{
   RxList<ArticleModel> articleList=RxList();
   RxBool loading=false.obs;
 
-  @override
-  onInit(){
-    super.onInit();
-    getArticleList();
-  }
+
 
   getArticleList() async {
+    articleList.clear();
     loading.value=true;
     var response = await DioService().getMethod(ApiConstant.getArticleList);
     if (response.statusCode == 200) {

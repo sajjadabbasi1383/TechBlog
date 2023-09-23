@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
+import 'package:tech_blog/constant/api_constant.dart';
+import 'package:tech_blog/constant/my_string.dart';
 import 'package:tech_blog/models/article_info_model.dart';
+import 'package:tech_blog/models/articles_model.dart';
 import 'package:tech_blog/models/tags_model.dart';
-import '../component/api_constant.dart';
-import '../component/my_string.dart';
-import '../models/articles_model.dart';
-import '../services/dio_service.dart';
+import 'package:tech_blog/services/dio_service.dart';
+
+
+
 
 class ManageArticleController extends GetxController {
   RxList<ArticleModel> articleList = RxList();

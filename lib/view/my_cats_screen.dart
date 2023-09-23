@@ -5,13 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:get/get.dart';
-import 'package:tech_blog/component/my_string.dart';
+import 'package:tech_blog/constant/my_string.dart';
 import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/models/tags_model.dart';
 
+import '../constant/dimens.dart';
 import '../controller/home_screen_controller.dart';
 import '../gen/assets.gen.dart';
-import '../component/my_color.dart';
+import '../constant/my_color.dart';
 
 class MyCats extends StatefulWidget {
   const MyCats({super.key});
@@ -27,8 +28,6 @@ class _MyCatsState extends State<MyCats> {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 21;
 
     RxBool myLoading = false.obs;
 
@@ -38,7 +37,7 @@ class _MyCatsState extends State<MyCats> {
         physics: const BouncingScrollPhysics(),
         child: Center(
           child: Padding(
-            padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin),
+            padding: EdgeInsets.only(left: Dimens.bodyMargin, right: Dimens.bodyMargin),
             child: Column(
               children: [
                 const SizedBox(

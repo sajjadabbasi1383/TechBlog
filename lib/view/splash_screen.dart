@@ -5,7 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/main.dart';
-import 'package:tech_blog/component/my_color.dart';
+import 'package:tech_blog/constant/my_color.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -4,13 +4,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tech_blog/component/my_string.dart';
-import 'package:tech_blog/controller/list_article_controller.dart';
+import 'package:tech_blog/constant/my_string.dart';
+import 'package:tech_blog/controller/article/list_article_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/view/article_list_screen.dart';
+import 'package:tech_blog/view/article/article_list_screen.dart';
 
-import '../component/my_color.dart';
-import '../controller/single_article_controller.dart';
+import '../../constant/my_color.dart';
+import '../../controller/article/single_article_controller.dart';
 
 class ArticleSingleScreen extends StatefulWidget {
   const ArticleSingleScreen({super.key});
@@ -41,7 +41,7 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
           () => singleArticleController.articleInfoModel.value.title==null?
           SizedBox(
             height: Get.height,
-            child: const SpinKitFadingCube(
+            child:  const SpinKitFadingCube(
               color: SolidColors.primaryColor,
               size: 40,
             ),

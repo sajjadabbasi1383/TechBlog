@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_component.dart';
-import 'package:tech_blog/controller/manage_article_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/component/my_string.dart';
+import 'package:tech_blog/constant/my_string.dart';
 import 'package:tech_blog/main.dart';
 
-import '../component/my_color.dart';
+import '../../constant/my_color.dart';
+import '../../controller/article/manage_article_controller.dart';
 
-// ignore: must_be_immutable
+
 class ManageArticle extends StatelessWidget {
   ManageArticle({
     super.key,
   });
 
-  var articleController = Get.find<ManageArticleController>();
+  final articleController = Get.find<ManageArticleController>();
 
   @override
   Widget build(BuildContext context) {

@@ -5,11 +5,13 @@ import 'package:share_plus/share_plus.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/component/my_color.dart';
-import 'package:tech_blog/component/my_string.dart';
+import 'package:tech_blog/constant/my_color.dart';
+import 'package:tech_blog/constant/my_string.dart';
 import 'package:tech_blog/view/home_screen.dart';
 import 'package:tech_blog/view/profile_screen.dart';
 import 'package:tech_blog/view/register_screen.dart';
+
+import '../constant/dimens.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -19,10 +21,8 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
-    double bodyMargin = size.width / 21;
-    double bodyMarginNavBar = size.width / 10;
+    double bodyMarginNavBar = Dimens.size.width / 10;
 
     return SafeArea(
       child: Scaffold(
@@ -30,7 +30,7 @@ class MainScreen extends StatelessWidget {
         drawer: Drawer(
           backgroundColor: SolidColors.scaffoldBg,
           child: Padding(
-            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+            padding: EdgeInsets.only(right: Dimens.bodyMargin, left: Dimens.bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -99,7 +99,7 @@ class MainScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Assets.images.logo.image(height: size.height / 15),
+              Assets.images.logo.image(height: Dimens.size.height / 15),
               const Icon(Icons.search, color: Colors.black),
             ],
           ),
@@ -111,7 +111,7 @@ class MainScreen extends StatelessWidget {
               () => IndexedStack(
                 index: selectedPageIndex.value,
                 children: [
-                  HomeScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  HomeScreen(textTheme: textTheme,),
                   const ProfileScreen(),
                 ],
               ),
@@ -123,7 +123,7 @@ class MainScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   Container(
-                    height: size.height / 11,
+                    height: Dimens.size.height / 11,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: GradientColors.bottomNavBackground,
@@ -134,7 +134,7 @@ class MainScreen extends StatelessWidget {
                   ),
                   BottomNavBar(
                     bodyMarginNavBar: bodyMarginNavBar,
-                    size: size,
+                    size: Dimens.size,
                     changeScreen: (int value) {
                       selectedPageIndex.value = value;
                     },
@@ -150,7 +150,7 @@ class MainScreen extends StatelessWidget {
 }
 
 class BottomNavBar extends StatelessWidget {
-  BottomNavBar({
+  const BottomNavBar({
     super.key,
     required this.bodyMarginNavBar,
     required this.size,

@@ -2,19 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:tech_blog/controller/list_article_controller.dart';
+import 'package:tech_blog/controller/article/list_article_controller.dart';
 import 'package:tech_blog/main.dart';
-import '../component/my_color.dart';
-import '../component/my_component.dart';
-import '../controller/single_article_controller.dart';
+import '../../constant/my_color.dart';
+import '../../component/my_component.dart';
+import '../../controller/article/single_article_controller.dart';
 
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({required this.title,super.key});
 
   ListArticleController listArticleController = Get.put(ListArticleController());
   SingleArticleController singleArticleController = Get.put(SingleArticleController());
-  String title="لیست مقالات";
-  String ttitle="لیست مقالات";
+   String title="لیست مقالات";
 
   @override
   Widget build(BuildContext context) {

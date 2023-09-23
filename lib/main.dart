@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/binding.dart';
-import 'package:tech_blog/view/article_single_manage_screen.dart';
-import 'package:tech_blog/view/article_single_screen.dart';
+import 'package:tech_blog/view/article/article_single_manage_screen.dart';
+import 'package:tech_blog/view/article/article_single_screen.dart';
+import 'package:tech_blog/view/article/manage_article_screen.dart';
 import 'package:tech_blog/view/main_screen.dart';
-import 'package:tech_blog/view/manage_article_screen.dart';
 import 'package:tech_blog/view/splash_screen.dart';
 
-import 'component/my_color.dart';
+import 'constant/my_color.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

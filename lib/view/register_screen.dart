@@ -3,8 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/component/my_string.dart';
+import 'package:tech_blog/constant/my_string.dart';
 import 'package:validators/validators.dart';
+
+import '../constant/dimens.dart';
 
 
 
@@ -18,7 +20,6 @@ class RegisterIntro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
 
     return SafeArea(
         child: Scaffold(
@@ -41,7 +42,7 @@ class RegisterIntro extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30),
               child: ElevatedButton(
                 onPressed: () {
-                  _showEmailBottomSheet(context, size, textTheme);
+                  _showEmailBottomSheet(context, Dimens.size, textTheme);
                 },
                 child: Text(MyStrings.letsGo),
               ),

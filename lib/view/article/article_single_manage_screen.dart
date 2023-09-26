@@ -15,11 +15,32 @@ import '../../constant/dimens.dart';
 import '../../constant/my_color.dart';
 import '../../controller/article/manage_article_controller.dart';
 
-class ArticleSingleManageScreen extends StatelessWidget{
-   ArticleSingleManageScreen({super.key});
+class ArticleSingleManageScreen extends StatelessWidget {
+  ArticleSingleManageScreen({super.key});
 
   final manageArticleController = Get.find<ManageArticleController>();
   final PickFileController pickFileController = Get.put(PickFileController());
+
+  getTitle() {
+    Get.defaultDialog(
+        title: "ویرایش عنوان مقاله",
+        titleStyle: const TextStyle(color: SolidColors.primaryColor),
+        content: TextField(
+          controller: manageArticleController.titleTextEditingController,
+          decoration: const InputDecoration(
+            hintText: "اینجا بنویس",
+          ),
+          style: const TextStyle(color: Colors.black),
+          keyboardType: TextInputType.text,
+        ),
+        radius: 9,
+        confirm: ElevatedButton(
+            onPressed: () {
+              manageArticleController.updateTitle();
+              Get.back();
+            },
+            child: const Text("ثبت")));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +60,19 @@ class ArticleSingleManageScreen extends StatelessWidget{
                         ? CachedNetworkImage(
                             imageUrl: manageArticleController
                                 .articleInfoModel.value.image!,
-                            imageBuilder: (context, imageProvider) =>
-                                Image(image: imageProvider,fit: BoxFit.cover,),
+                            imageBuilder: (context, imageProvider) => Image(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
                             errorWidget: (context, url, error) => Image.asset(
                               Assets.images.singlePlaceHolder.path,
                               fit: BoxFit.cover,
                             ),
                           )
-                        : Image.file(File(pickFileController.file.value.path!),fit: BoxFit.cover,),
+                        : Image.file(
+                            File(pickFileController.file.value.path!),
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   Positioned(
                       top: 0,
@@ -119,12 +145,18 @@ class ArticleSingleManageScreen extends StatelessWidget{
               const SizedBox(
                 height: 20,
               ),
-              seeMore(textTheme, MyStrings.editTitleArticle),
+              GestureDetector(
+                  onTap: () {
+                    getTitle();
+                  },
+                  child: seeMore(textTheme, MyStrings.editTitleArticle)),
               Padding(
                 padding: EdgeInsets.fromLTRB(
                     Dimens.bodyMargin, 7, Dimens.bodyMargin, 25),
                 child: Text(
-                  manageArticleController.articleInfoModel.value.title!,
+                  manageArticleController.articleInfoModel.value.title==''?
+                  MyStrings.titltArrticle:manageArticleController.articleInfoModel.value.title!
+                  ,
                   style: textTheme.labelLarge,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/constant/api_constant.dart';
 import 'package:tech_blog/constant/my_string.dart';
@@ -7,12 +8,11 @@ import 'package:tech_blog/models/tags_model.dart';
 import 'package:tech_blog/services/dio_service.dart';
 
 
-
-
 class ManageArticleController extends GetxController {
   RxList<ArticleModel> articleList = RxList();
   RxList<TagsModel> tagList = RxList();
   RxBool loading = false.obs;
+  TextEditingController titleTextEditingController=TextEditingController();
   Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel(
           MyStrings.titltArrticle, MyStrings.editOrginalTextArticle, '')
       .obs;
@@ -34,5 +34,11 @@ class ManageArticleController extends GetxController {
       loading.value = false;
     }
     //articleList.clear();
+  }
+
+  updateTitle(){
+    articleInfoModel.update((val) {
+      val!.title=titleTextEditingController.text;
+    });
   }
 }

@@ -20,7 +20,7 @@ class ArticleListScreen extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     return SafeArea(
         child: Scaffold(
-      appBar: appBar(textTheme, title),
+      appBar: appBar(context, title),
       body: SizedBox(
         child: Obx(
           () => listArticleController.loading==false? ListView.builder(

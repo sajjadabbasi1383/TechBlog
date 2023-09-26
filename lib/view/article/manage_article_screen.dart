@@ -24,7 +24,7 @@ class ManageArticle extends StatelessWidget {
 
     return SafeArea(
         child: Scaffold(
-          appBar: appBar(textTheme, MyStrings.titleAppBarManageArticle),
+          appBar: appBar(context, MyStrings.titleAppBarManageArticle),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(19,10,19,19),
         child: ElevatedButton(

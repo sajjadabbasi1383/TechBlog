@@ -9,6 +9,7 @@ import 'package:tech_blog/constant/my_string.dart';
 import 'package:tech_blog/controller/pick_file_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/services/pick_file.dart';
+import 'package:tech_blog/view/article/article_content_editor.dart';
 
 import '../../component/my_component.dart';
 import '../../constant/dimens.dart';
@@ -154,15 +155,17 @@ class ArticleSingleManageScreen extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(
                     Dimens.bodyMargin, 7, Dimens.bodyMargin, 25),
                 child: Text(
-                  manageArticleController.articleInfoModel.value.title==''?
-                  MyStrings.titltArrticle:manageArticleController.articleInfoModel.value.title!
-                  ,
+                  manageArticleController.articleInfoModel.value.title == ''
+                      ? MyStrings.titltArrticle
+                      : manageArticleController.articleInfoModel.value.title!,
                   style: textTheme.labelLarge,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              seeMore(textTheme, MyStrings.editMainTextArticle),
+              GestureDetector(
+                  onTap: () => Get.to(ArticleContentEditor()),
+                  child: seeMore(textTheme, MyStrings.editMainTextArticle)),
               Padding(
                 padding: EdgeInsets.fromLTRB(
                     Dimens.bodyMargin, 7, Dimens.bodyMargin, 25),

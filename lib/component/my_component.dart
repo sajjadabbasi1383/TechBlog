@@ -27,14 +27,14 @@ class CustomDivider extends StatelessWidget {
 
 
 class MainTags extends StatelessWidget {
-   MainTags({
+   const MainTags({
     super.key,
     required this.textTheme,
     required this.index
   });
 
   final TextTheme textTheme;
-  var index;
+  final index;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,8 @@ myLaunchUrl(String url)async{
     await launchUrl(uri);
 }
 
-PreferredSize appBar(TextTheme textTheme,String title) {
+PreferredSize appBar(BuildContext context,String title) {
+  var textTheme = Theme.of(context).textTheme;
   return PreferredSize(
     preferredSize: const Size.fromHeight(62),
     child: Padding(

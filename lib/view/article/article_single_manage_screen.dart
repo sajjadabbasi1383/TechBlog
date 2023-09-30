@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/constant/my_string.dart';
+import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/controller/pick_file_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/services/pick_file.dart';
@@ -182,61 +183,94 @@ class ArticleSingleManageScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              seeMore(textTheme, MyStrings.selectCategory),
+              GestureDetector(
+                  onTap: () => chooseCatsBottomShit(textTheme),
+                  child: seeMore(textTheme, MyStrings.selectCategory)),
 
-              //tag list
-              SizedBox(
-                height: 60,
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: manageArticleController.tagList.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return manageArticleController.tagList[index].id == '2' ||
-                            manageArticleController.tagList[index].id == '6'
-                        ? Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                5, 8, index == 0 ? Dimens.bodyMargin : 5, 8),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18),
-                                    color: SolidColors.greyColor2),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 8, 10, 8),
-                                  child: Center(
-                                    child: Text(
-                                      manageArticleController
-                                          .tagList[index].title!,
-                                      style: textTheme.headlineMedium,
-                                    ),
-                                  ),
-                                )),
-                          )
-                        : Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                5, 8, index == 0 ? Dimens.bodyMargin : 5, 8),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18),
-                                    color: SolidColors.greyColor2),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 8, 10, 8),
-                                  child: Center(
-                                    child: Text(
-                                      manageArticleController
-                                          .tagList[index].title!,
-                                      style: textTheme.headlineMedium,
-                                    ),
-                                  ),
-                                )),
-                          );
-                  },
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                    Dimens.bodyMargin, 7, Dimens.bodyMargin, 25),
+                child: Text(
+                  manageArticleController.articleInfoModel.value.catName == null
+                      ? MyStrings.noCategorySelected
+                      : manageArticleController.articleInfoModel.value.catName!,
+                  style: textTheme.labelLarge,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
+
+              //tag list
             ],
           ),
+        ),
+      ),
+    ));
+  }
+
+  Widget cats(textTheme) {
+
+    var homeScreenController=Get.find<HomeScreenController>();
+
+    return SizedBox(
+      height: Get.height/2.3,
+      child: GridView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: homeScreenController.tagList.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          return Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                      5, 8,  5 , 8),
+                  child: GestureDetector(
+                    onTap: () {
+                      manageArticleController.articleInfoModel.update((val) {
+                        val?.catId=homeScreenController.tagList[index].id;
+                        val?.catName=homeScreenController.tagList[index].title;
+                      });
+                      Get.back();
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(19),
+                            color: SolidColors.primaryColor),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 10, 8),
+                          child: Center(
+                            child: Text(
+                              homeScreenController.tagList[index].title!,
+                              style: textTheme.headlineLarge,
+                            ),
+                          ),
+                        )),
+                  ),
+                );
+        }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
+      ),
+      ),
+    );
+  }
+
+  chooseCatsBottomShit(TextTheme textTheme) {
+    Get.bottomSheet(Container(
+      height: Get.height / 1.8,
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            Text(MyStrings.selectCategory,style: textTheme.labelLarge,),
+            const SizedBox(
+              height: 14,
+            ),
+            cats(textTheme)
+          ],
         ),
       ),
     ));

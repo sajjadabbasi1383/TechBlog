@@ -19,7 +19,7 @@ class SingleArticleController extends GetxController{
     articleInfoModel=ArticleInfoModel(null,null,null).obs;
     loading.value=true;
     var userId='';
-    var response = await DioService().getMethod('${ApiConstant.baseUrl}article/get.php?command=info&id=$id&user_id=$userId');
+    var response = await DioService().getMethod('${ApiUrlConstant.baseUrl}article/get.php?command=info&id=$id&user_id=$userId');
     if (response.statusCode == 200) {
       articleInfoModel.value=ArticleInfoModel.fromJson(response.data);
       loading.value=false;

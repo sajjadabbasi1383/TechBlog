@@ -115,8 +115,8 @@ class ArticleSingleManageScreen extends StatelessWidget {
                       left: 0,
                       child: Center(
                         child: GestureDetector(
-                          onTap: () {
-                            pickFile();
+                          onTap: () async {
+                            await pickFile();
                           },
                           child: Container(
                             height: 35,
@@ -199,6 +199,10 @@ class ArticleSingleManageScreen extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+
+              ElevatedButton(
+                  onPressed: () async =>await manageArticleController.storeArticle(),
+                  child:  Text(manageArticleController.loading.value?"صبر کنید...":"ارسال مطلب"))
 
               //tag list
             ],

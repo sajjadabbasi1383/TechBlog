@@ -27,7 +27,7 @@ class RegisterController extends GetxController {
       'email': emailTextEditingController.text,
       'command': 'register'
     };
-    var response = await DioService().postMethod(map, ApiConstant.postRegister);
+    var response = await DioService().postMethod(map, ApiUrlConstant.postRegister);
     email = emailTextEditingController.text;
     userId = response.data['user_id'];
     debugPrint(response.toString());
@@ -41,7 +41,7 @@ class RegisterController extends GetxController {
       'command': 'verify'
     };
     debugPrint(map.toString());
-    var response = await DioService().postMethod(map, ApiConstant.postRegister);
+    var response = await DioService().postMethod(map, ApiUrlConstant.postRegister);
     debugPrint(response.data.toString());
 
     var status = response.data['response'];
@@ -68,9 +68,9 @@ class RegisterController extends GetxController {
     box.write('token', tokenResponse);
     box.write('user_id', userIdResponse);
 
-    debugPrint("read::::"+box.read('token').toString());
-    debugPrint("read::::"+box.read('email').toString());
-    debugPrint("read::::"+box.read('user_id').toString());
+    debugPrint("read::::${box.read('token')}");
+    debugPrint("read::::${box.read('email')}");
+    debugPrint("read::::${box.read('user_id')}");
 
     Get.offAllNamed(NamedRoute.routeMainScreen);
   }

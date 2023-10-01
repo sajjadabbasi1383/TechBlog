@@ -13,7 +13,7 @@ class ListArticleController extends GetxController{
   getArticleList() async {
     articleList.clear();
     loading.value=true;
-    var response = await DioService().getMethod(ApiConstant.getArticleList);
+    var response = await DioService().getMethod(ApiUrlConstant.getArticleList);
     if (response.statusCode == 200) {
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));
@@ -26,7 +26,7 @@ class ListArticleController extends GetxController{
   getArticleWithTag(String id) async {
     articleList.clear();
     loading.value=true;
-    var response = await DioService().getMethod('${ApiConstant.baseUrl}article/get.php?command=get_articles_with_tag_id&tag_id=$id&user_id=');
+    var response = await DioService().getMethod('${ApiUrlConstant.baseUrl}article/get.php?command=get_articles_with_tag_id&tag_id=$id&user_id=');
     if (response.statusCode == 200) {
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));

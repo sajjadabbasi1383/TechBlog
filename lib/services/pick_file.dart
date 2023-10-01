@@ -6,8 +6,8 @@ PickFileController pickFileController = Get.put(PickFileController());
 
 
 Future pickFile() async {
+
   FilePickerResult? result =
-      await FilePicker.platform.pickFiles(type: FileType.image);
+      await FilePicker.platform.pickFiles(type: FileType.image,);
   pickFileController.file.value = result!.files.first;
-  return pickFileController.file.value;
 }

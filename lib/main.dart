@@ -7,7 +7,7 @@ import 'package:tech_blog/view/article/article_single_manage_screen.dart';
 import 'package:tech_blog/view/article/article_single_screen.dart';
 import 'package:tech_blog/view/article/manage_article_screen.dart';
 import 'package:tech_blog/view/main_screen.dart';
-import 'package:tech_blog/view/splash_screen.dart';
+import 'package:tech_blog/view/podcast/podcast_single_screen.dart';
 
 import 'constant/my_color.dart';
 
@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: NamedRoute.routeArticleSingleManage, page: ()=>  ArticleSingleManageScreen(),binding: ArticleManagerBinding()),
       ],
       
-      home: const SplashScreen(),
+      //home: const SplashScreen(),
+      home: const SinglePodcast(),
     );
   }
 

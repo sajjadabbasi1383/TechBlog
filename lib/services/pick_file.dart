@@ -9,5 +9,8 @@ Future pickFile() async {
 
   FilePickerResult? result =
       await FilePicker.platform.pickFiles(type: FileType.image,);
-  pickFileController.file.value = result!.files.first;
+  if(result!=null){
+    pickFileController.file.value = result.files.first;
+  }
+
 }

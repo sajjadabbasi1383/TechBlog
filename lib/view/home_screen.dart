@@ -197,53 +197,58 @@ class HomeScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: homeScreenController.topPodcastList.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding:
-                  EdgeInsets.only(right: index == 0 ? Dimens.bodyMargin : 8, left: 6),
-              child: Column(
-                children: [
-                  //blog item
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 7),
-                    child: SizedBox(
-                      width: Dimens.size.width / 2.55,
-                      height: Dimens.size.height / 5.7,
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            homeScreenController.topPodcastList[index].poster!,
-                        imageBuilder: (context, imageProvider) {
-                          return Container(
+            return GestureDetector(
+              onTap: () {
+                Get.toNamed(NamedRoute.routeSinglePodcast,arguments:homeScreenController.topPodcastList[index]);
+              },
+              child: Padding(
+                padding:
+                    EdgeInsets.only(right: index == 0 ? Dimens.bodyMargin : 8, left: 6),
+                child: Column(
+                  children: [
+                    //blog item
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 7),
+                      child: SizedBox(
+                        width: Dimens.size.width / 2.55,
+                        height: Dimens.size.height / 5.7,
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              homeScreenController.topPodcastList[index].poster!,
+                          imageBuilder: (context, imageProvider) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(17),
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover)),
+                            );
+                          },
+                          placeholder: (context, url) => const SpinKitFadingCube(
+                            color: SolidColors.primaryColor,
+                            size: 27,
+                          ),
+                          errorWidget: (context, url, error) => Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(17),
-                                image: DecorationImage(
-                                    image: imageProvider, fit: BoxFit.cover)),
-                          );
-                        },
-                        placeholder: (context, url) => const SpinKitFadingCube(
-                          color: SolidColors.primaryColor,
-                          size: 27,
-                        ),
-                        errorWidget: (context, url, error) => Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(17),
-                              color: SolidColors.greyColor2),
-                          child: const Icon(
-                            Icons.image_not_supported_outlined,
-                            size: 50,
-                            color: Colors.grey,
+                                color: SolidColors.greyColor2),
+                            child: const Icon(
+                              Icons.image_not_supported_outlined,
+                              size: 50,
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: Dimens.size.width / 2.55,
-                    child: Text(
-                      homeScreenController.topPodcastList[index].title!,
-                      textAlign: TextAlign.center,
+                    SizedBox(
+                      width: Dimens.size.width / 2.55,
+                      child: Text(
+                        homeScreenController.topPodcastList[index].title!,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

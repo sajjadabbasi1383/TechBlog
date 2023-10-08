@@ -8,6 +8,7 @@ import 'package:tech_blog/view/article/article_single_screen.dart';
 import 'package:tech_blog/view/article/manage_article_screen.dart';
 import 'package:tech_blog/view/main_screen.dart';
 import 'package:tech_blog/view/podcast/podcast_single_screen.dart';
+import 'package:tech_blog/view/splash_screen.dart';
 
 import 'constant/my_color.dart';
 
@@ -37,10 +38,11 @@ class MyApp extends StatelessWidget {
         GetPage(name: NamedRoute.routeSingleArticle, page: ()=>const ArticleSingleScreen(),binding: ArticleBinding()),
         GetPage(name: NamedRoute.routeManageArticle, page: ()=> ManageArticle(),binding: ArticleManagerBinding()),
         GetPage(name: NamedRoute.routeArticleSingleManage, page: ()=>  ArticleSingleManageScreen(),binding: ArticleManagerBinding()),
+        GetPage(name: NamedRoute.routeSinglePodcast, page: ()=>  SinglePodcast()),
       ],
       
-      //home: const SplashScreen(),
-      home: const SinglePodcast(),
+      home:  const SplashScreen(),
+      //home: const SinglePodcast(),
     );
   }
 
@@ -121,5 +123,6 @@ class NamedRoute{
   static String routeSingleArticle='/SingleArticle';
   static String routeManageArticle='/ManageArticle';
   static String routeArticleSingleManage='/ArticleSingleManage';
+  static String routeSinglePodcast='/SinglePodcast';
 }
 

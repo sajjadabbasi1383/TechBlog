@@ -6,6 +6,7 @@ class ApiUrlConstant{
   static const publishedByMe="${baseUrl}article/get.php?command=published_by_me&user_id=";
   static const postRegister="${baseUrl}register/action.php";
   static const postArticle="${baseUrl}article/post.php";
+  static const podcastFile="${baseUrl}podcast/get.php?command=get_files&podcats_id=";
 }
 
 class ApiKeyConstant{

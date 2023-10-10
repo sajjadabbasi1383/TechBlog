@@ -137,7 +137,7 @@ class SinglePodcast extends StatelessWidget {
                 ),
               ),
               Obx(
-                  ()=> Padding(
+                () => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
@@ -201,26 +201,40 @@ class SinglePodcast extends StatelessWidget {
                       backgroundColor: Colors.white,
                       progressColor: Colors.orange,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.skip_next,
                           color: Colors.white,
                           size: 38,
                         ),
-                        Icon(
-                          Icons.play_circle,
-                          color: Colors.white,
-                          size: 44,
+                        GestureDetector(
+                          onTap: () {
+
+                            singlePodcastController.player.playing
+                                ? singlePodcastController.player.pause()
+                                : singlePodcastController.player.play();
+
+                            singlePodcastController.playState.value =
+                                singlePodcastController.player.playing;
+                          },
+                          child: Obx(
+                            () => Icon(
+                                singlePodcastController.playState.value
+                                    ? Icons.pause_circle
+                                    : Icons.play_circle,
+                                color: Colors.white,
+                                size: 44),
+                          ),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.skip_previous,
                           color: Colors.white,
                           size: 38,
                         ),
-                        SizedBox(),
-                        Icon(
+                        const SizedBox(),
+                        const Icon(
                           Icons.repeat,
                           color: Colors.white,
                           size: 30,

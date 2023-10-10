@@ -204,10 +204,15 @@ class SinglePodcast extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const Icon(
-                          Icons.skip_next,
-                          color: Colors.white,
-                          size: 38,
+                        GestureDetector(
+                          onTap: () async {
+                            await singlePodcastController.player.seekToNext();
+                          },
+                          child: const Icon(
+                            Icons.skip_next,
+                            color: Colors.white,
+                            size: 38,
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -228,10 +233,15 @@ class SinglePodcast extends StatelessWidget {
                                 size: 44),
                           ),
                         ),
-                        const Icon(
-                          Icons.skip_previous,
-                          color: Colors.white,
-                          size: 38,
+                        GestureDetector(
+                          onTap: () async {
+                            await singlePodcastController.player.seekToPrevious();
+                          },
+                          child: const Icon(
+                            Icons.skip_previous,
+                            color: Colors.white,
+                            size: 38,
+                          ),
                         ),
                         const SizedBox(),
                         const Icon(

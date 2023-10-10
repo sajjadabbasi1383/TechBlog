@@ -15,6 +15,7 @@ class SinglePodcastController extends GetxController {
   late var playList;
   final player = AudioPlayer();
   RxBool playState=false.obs;
+  RxInt currentFileIndex=0.obs;
 
   @override
   onInit()async{

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:tech_blog/constant/dimens.dart';
 
 import '../../constant/my_color.dart';
@@ -145,9 +145,10 @@ class SinglePodcast extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () async {
-                          await controller.player.seek(Duration.zero,index: index);
+                          await controller.player
+                              .seek(Duration.zero, index: index);
                           controller.currentFileIndex.value =
-                          controller.player.currentIndex!;
+                              controller.player.currentIndex!;
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(7.0),
@@ -169,11 +170,11 @@ class SinglePodcast extends StatelessWidget {
                                         child: Text(
                                           controller
                                               .podcastFileList[index].title!,
-                                          style:
-                                              controller.currentFileIndex.value ==
-                                                      index
-                                                  ? textTheme.titleLarge
-                                                  : textTheme.headlineMedium,
+                                          style: controller
+                                                      .currentFileIndex.value ==
+                                                  index
+                                              ? textTheme.titleLarge
+                                              : textTheme.headlineMedium,
                                         )),
                                   )
                                 ],
@@ -198,7 +199,7 @@ class SinglePodcast extends StatelessWidget {
             right: Dimens.bodyMargin,
             left: Dimens.bodyMargin,
             child: Container(
-              height: Get.height / 8,
+              height: Get.height / 7,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   gradient:
@@ -208,10 +209,24 @@ class SinglePodcast extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    LinearPercentIndicator(
-                      percent: 0.6,
-                      backgroundColor: Colors.white,
-                      progressColor: Colors.orange,
+                    Obx(
+                      ()=> ProgressBar(
+                          progress: controller.progressValue.value,
+                          buffered: controller.bufferedValue.value,
+                          total: controller.player.duration ??
+                              const Duration(seconds: 0),
+                          baseBarColor: Colors.white,
+                        progressBarColor: Colors.orange,
+                        thumbColor: Colors.yellow,
+                        timeLabelTextStyle: const TextStyle(color: Colors.white),
+                        thumbRadius: 8,
+                        onSeek: (position) {
+                            controller.player.seek(position);
+                            controller.player.playing
+                                ? controller.startProgress()
+                                : controller.timer!.cancel();
+                        },
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -230,6 +245,11 @@ class SinglePodcast extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
+
+                            controller.player.playing
+                                ? controller.timer!.cancel()
+                                : controller.startProgress();
+
                             controller.player.playing
                                 ? controller.player.pause()
                                 : controller.player.play();

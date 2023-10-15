@@ -281,10 +281,17 @@ class SinglePodcast extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(),
-                        const Icon(
-                          Icons.repeat,
-                          color: Colors.white,
-                          size: 30,
+                        Obx(
+                          ()=> GestureDetector(
+                            onTap: () {
+                              controller.setLoopMode();
+                            },
+                            child: Icon(
+                              Icons.repeat,
+                              color: controller.isLoopAll.value?Colors.blue:Colors.white,
+                              size: 30,
+                            ),
+                          ),
                         ),
                       ],
                     )

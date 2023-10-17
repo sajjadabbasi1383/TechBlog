@@ -149,41 +149,42 @@ class SinglePodcast extends StatelessWidget {
                               .seek(Duration.zero, index: index);
                           controller.currentFileIndex.value =
                               controller.player.currentIndex!;
+                          controller.timerCheck();
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.all(7.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  ImageIcon(
-                                    Assets.icons.microphon.provider(),
-                                    color: SolidColors.seeMore,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Obx(
-                                    () => SizedBox(
-                                        width: Get.width / 1.5,
-                                        child: Text(
-                                          controller
-                                              .podcastFileList[index].title!,
-                                          style: controller
-                                                      .currentFileIndex.value ==
-                                                  index
-                                              ? textTheme.titleLarge
-                                              : textTheme.headlineMedium,
-                                        )),
-                                  )
-                                ],
-                              ),
-                              Text(
-                                "${controller.podcastFileList[index].length!}:00",
-                                style: textTheme.headlineSmall,
-                              ),
-                            ],
+                        child: Obx(
+                            ()=> Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    ImageIcon(
+                                      Assets.icons.microphon.provider(),
+                                      color: SolidColors.seeMore,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                     SizedBox(
+                                          width: Get.width / 1.5,
+                                          child: Text(
+                                            controller
+                                                .podcastFileList[index].title!,
+                                            style: controller
+                                                        .currentFileIndex.value ==
+                                                    index
+                                                ? textTheme.titleLarge
+                                                : textTheme.headlineMedium,
+                                          )),
+                                  ],
+                                ),
+                                Text(
+                                  "${controller.podcastFileList[index].length!}:00",
+                                  style: textTheme.headlineSmall,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -211,20 +212,26 @@ class SinglePodcast extends StatelessWidget {
                   children: [
                     Obx(
                       ()=> ProgressBar(
-                          progress: controller.progressValue.value,
-                          buffered: controller.bufferedValue.value,
+                          progress: controller.progressState.value,
+                          buffered: controller.bufferState.value,
                           total: controller.player.duration ??
-                              const Duration(seconds: 0),
+                              const Duration(seconds: 1),
                           baseBarColor: Colors.white,
                         progressBarColor: Colors.orange,
                         thumbColor: Colors.yellow,
                         timeLabelTextStyle: const TextStyle(color: Colors.white),
                         thumbRadius: 8,
-                        onSeek: (position) {
-                            controller.player.seek(position);
-                            controller.player.playing
-                                ? controller.startProgress()
-                                : controller.timer!.cancel();
+                        onSeek: (position) async {
+                          controller.player.seek(position);
+
+                          if (controller.player.playing) {
+                            controller.startProgress();
+                          } else if (position <=  const Duration(seconds: 0)) {
+                            await controller.player.seekToNext();
+                            controller.currentFileIndex.value =
+                            controller.player.currentIndex!;
+                            controller.timerCheck();
+                          }
                         },
                       ),
                     ),
@@ -236,6 +243,7 @@ class SinglePodcast extends StatelessWidget {
                             await controller.player.seekToNext();
                             controller.currentFileIndex.value =
                                 controller.player.currentIndex!;
+                            controller.timerCheck();
                           },
                           child: const Icon(
                             Icons.skip_next,
@@ -273,6 +281,7 @@ class SinglePodcast extends StatelessWidget {
                             await controller.player.seekToPrevious();
                             controller.currentFileIndex.value =
                                 controller.player.currentIndex!;
+                            controller.timerCheck();
                           },
                           child: const Icon(
                             Icons.skip_previous,

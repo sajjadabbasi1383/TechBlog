@@ -7,11 +7,11 @@ import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/constant/my_color.dart';
 import 'package:tech_blog/constant/my_string.dart';
-import 'package:tech_blog/view/home_screen.dart';
-import 'package:tech_blog/view/profile_screen.dart';
+import 'package:tech_blog/view/main/home_screen.dart';
+import 'package:tech_blog/view/main/profile_screen.dart';
 import 'package:tech_blog/view/register_screen.dart';
 
-import '../constant/dimens.dart';
+import '../../constant/dimens.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -74,6 +74,8 @@ class MainScreen extends StatelessWidget {
                   },
                 ),
                 const Divider(color: SolidColors.dividerColor, thickness: 0.9),
+                SizedBox(height: Get.height/3.3,),
+                Center(child: Text("Developed by Sajjad Abbasi",style: textTheme.headlineSmall,)),
               ],
             ),
           ),

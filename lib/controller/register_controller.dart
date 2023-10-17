@@ -6,11 +6,10 @@ import 'package:tech_blog/constant/api_constant.dart';
 import 'package:tech_blog/constant/my_string.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/models/tags_model.dart';
+import 'package:tech_blog/routeManager/names.dart';
 import 'package:tech_blog/services/dio_service.dart';
 import 'package:tech_blog/view/my_cats_screen.dart';
 import 'package:tech_blog/view/register_screen.dart';
-
-import '../main.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailTextEditingController = TextEditingController();
@@ -76,10 +75,11 @@ class RegisterController extends GetxController {
   }
 
   logOut(){
-    GetStorage().remove('token');
-    GetStorage().remove('email');
-    GetStorage().remove('user_id');
-    GetStorage().remove('nameFamily');
+    //GetStorage().remove('token');
+    //GetStorage().remove('email');
+    //GetStorage().remove('user_id');
+    //GetStorage().remove('nameFamily');
+    box.erase();
     selectedTags.clear();
     Get.offAllNamed('/MainScreen');
   }

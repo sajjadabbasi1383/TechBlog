@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/constant/my_string.dart';
-import 'package:tech_blog/main.dart';
+import 'package:tech_blog/routeManager/names.dart';
 
 import '../../constant/my_color.dart';
 import '../../controller/article/manage_article_controller.dart';

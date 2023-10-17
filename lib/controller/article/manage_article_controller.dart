@@ -8,10 +8,10 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/constant/api_constant.dart';
 import 'package:tech_blog/constant/my_string.dart';
 import 'package:tech_blog/controller/pick_file_controller.dart';
-import 'package:tech_blog/main.dart';
 import 'package:tech_blog/models/article_info_model.dart';
 import 'package:tech_blog/models/articles_model.dart';
 import 'package:tech_blog/models/tags_model.dart';
+import 'package:tech_blog/routeManager/names.dart';
 import 'package:tech_blog/services/dio_service.dart';
 
 

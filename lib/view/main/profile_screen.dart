@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/view/my_cats_screen.dart';
-import '../constant/dimens.dart';
-import '../gen/assets.gen.dart';
-import '../constant/my_color.dart';
-import '../component/my_component.dart';
-import '../constant/my_string.dart';
+import '../../constant/dimens.dart';
+import '../../gen/assets.gen.dart';
+import '../../constant/my_color.dart';
+import '../../component/my_component.dart';
+import '../../constant/my_string.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({

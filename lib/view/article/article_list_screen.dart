@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/controller/article/list_article_controller.dart';
-import 'package:tech_blog/main.dart';
+import 'package:tech_blog/routeManager/names.dart';
 import '../../constant/my_color.dart';
 import '../../component/my_component.dart';
 import '../../controller/article/single_article_controller.dart';

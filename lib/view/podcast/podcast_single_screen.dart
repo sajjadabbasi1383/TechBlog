@@ -67,7 +67,14 @@ class SinglePodcast extends StatelessWidget {
                               width: 18,
                             ),
                             GestureDetector(
-                              onTap: () => Get.back(),
+                              onTap: () async {
+                                await controller.player
+                                    .stop();
+                                controller.startProgress();
+                                controller.progressState
+                                    .value = const Duration(seconds: 0);
+                                Get.back();
+                              },
                               child: Container(
                                 color: Colors.transparent,
                                 width: 35,
